@@ -1,8 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, BrainCircuit } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -83,137 +82,102 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          onClick={handleBackdropClick}
         >
-          {/* Revolutionary Immersive Backdrop */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-cyan-950/40 via-slate-900/50 to-violet-950/40 dark:from-cyan-950/50 dark:via-slate-900/60 dark:to-violet-950/50 backdrop-blur-xl"
-            style={{
-              backdropFilter: "blur(24px) saturate(180%)",
-              WebkitBackdropFilter: "blur(24px) saturate(180%)"
-            }}
+          {/* Apple Design Language Backdrop - Subtle blur with opacity */}
+          <motion.div 
+            className="absolute inset-0 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            onClick={handleBackdropClick}
-          />
-
-          {/* Neural Network Pattern Overlay */}
-          <div className="absolute inset-0 opacity-25 pointer-events-none">
-            {[...Array(18)].map((_, i) => (
-              <motion.div
-                key={`newsletter-neural-${i}`}
-                className="absolute w-0.5 h-10 bg-gradient-to-b from-cyan-400/40 to-violet-400/40"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  scaleY: [0, 1, 0],
-                  opacity: [0, 0.7, 0],
-                  rotate: [0, Math.random() * 180],
-                }}
-                transition={{
-                  duration: 3.5 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: Math.random() * 3,
-                  ease: "easeInOut"
-                }}
-              />
-            ))}
-          </div>
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            {/* Subtle overlay - Light mode: dark overlay, Dark mode: light overlay */}
+            <div className="absolute inset-0 bg-black/10 dark:bg-white/5" />
+          </motion.div>
 
           {/* Centered Modal Container */}
-          <div className="absolute inset-0 flex items-center justify-center p-4">
+          <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
             <motion.div
-              className="relative w-full max-w-md"
-              initial={{ scale: 0.85, opacity: 0, y: 80 }}
+              className="relative w-full max-w-md pointer-events-auto"
+              initial={{ scale: 0.96, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.85, opacity: 0, y: 80 }}
+              exit={{ scale: 0.96, opacity: 0, y: 20 }}
               transition={{ 
                 type: "spring",
-                stiffness: 260,
-                damping: 18,
-                duration: 0.7,
-                delay: 0.15
+                stiffness: 300,
+                damping: 30,
+                duration: 0.4
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Glass Card with Neural Glow */}
-              <motion.div
-                className="relative modal-glass rounded-3xl overflow-hidden"
-                animate={{
-                  boxShadow: [
-                    "0 25px 50px -12px rgba(6, 182, 212, 0.3)",
-                    "0 25px 50px -12px rgba(139, 92, 246, 0.3)",
-                    "0 25px 50px -12px rgba(6, 182, 212, 0.3)",
-                  ]
+              {/* Apple-Style Modal Card with Website Gradient Background */}
+              <div 
+                className="relative border border-border rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden"
+                style={{
+                  background: `
+                    radial-gradient(circle at 20% 50%, hsla(270, 85%, 60%, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, hsla(188, 95%, 44%, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 80%, hsla(328, 85%, 70%, 0.1) 0%, transparent 50%),
+                    var(--background)
+                  `,
+                  backgroundAttachment: 'fixed',
+                  backgroundSize: '100% 100%'
                 }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               >
                 {/* Content Container */}
-                <div className="relative modal-content-glass rounded-3xl p-8">
+                <div className="relative p-10">
                   <Button
                     onClick={onClose}
                     variant="ghost"
                     size="sm"
-                    className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors"
+                    className="absolute top-5 right-5 p-2 h-9 w-9 rounded-full modal-close-button"
+                    aria-label="Close modal"
                   >
-                    <X className="w-5 h-5" />
+                    <X className="w-4 h-4" />
                   </Button>
 
-                  <div className="text-center mb-6">
-                    <motion.div
-                      className="w-16 h-16 mx-auto mb-4 glass-card rounded-full flex items-center justify-center"
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    >
-                      <BrainCircuit className="w-8 h-8 text-[hsl(188,95%,44%)]" />
-                    </motion.div>
-                    <h2 className="text-2xl font-bold gradient-text mb-2">
-                      Join the Neural Network
+                  <div className="text-center mb-10">
+                    <h2 className="text-[32px] font-semibold text-foreground mb-3 tracking-[-0.02em]">
+                      Newsletter
                     </h2>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground text-[15px] leading-[1.47] max-w-sm mx-auto">
                       Get updates on AI insights, projects, and breakthrough discoveries
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
                     <div>
-                      <Label htmlFor="newsletter-email">Email Address</Label>
                       <Input
                         id="newsletter-email"
                         type="email"
                         {...register("email")}
-                        className="mt-1 glass-card border-white/25 dark:border-white/15 focus:border-[hsl(188,95%,44%)]/50 focus:ring-[hsl(188,95%,44%)]/20"
-                        placeholder="your.email@example.com"
+                        className="h-[52px] rounded-full border-border bg-background px-5 text-[15px] focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary/50 transition-all duration-200"
+                        placeholder="Your email"
                       />
                       {errors.email && (
-                        <p className="text-sm text-red-400 mt-1">{errors.email.message}</p>
+                        <p className="text-[13px] text-destructive mt-2.5">{errors.email.message}</p>
                       )}
                     </div>
 
                     <Button
                       type="submit"
                       disabled={newsletterMutation.isPending}
-                      className="w-full glass-card border-0 hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-[hsl(188,95%,44%)]/25 font-medium py-4"
+                      className="w-full h-[52px] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-[15px] transition-all duration-200 shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] active:scale-[0.98]"
                     >
                       {newsletterMutation.isPending ? (
-                        <div className="flex items-center space-x-2">
-                          <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                          <span>Connecting...</span>
+                        <div className="flex items-center justify-center space-x-2.5">
+                          <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                          <span>Subscribing...</span>
                         </div>
                       ) : (
-                        <div className="flex items-center space-x-2">
-                          <BrainCircuit className="w-4 h-4" />
-                          <span>Join Network</span>
-                        </div>
+                        <span>Subscribe</span>
                       )}
                     </Button>
                   </form>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           </div>
         </motion.div>

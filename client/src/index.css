@@ -33,9 +33,9 @@
   /* Consistent spacing for home section text elements */
   --home-section-spacing: clamp(0.875rem, 2vw, 1.5rem);
 
-  /* Contact button colors for light theme */
-  --contact-button-bg: hsl(270, 85%, 60%);
-  --contact-button-text: hsl(0, 0%, 98%);
+  /* Contact button colors for light theme - matches social icon background */
+  --contact-button-bg: rgba(255, 255, 255, 0.15);
+  --contact-button-text: hsl(0, 0%, 9%);
   --resume-button-bg: transparent;
   --resume-button-text: hsl(0, 0%, 9%);
   --resume-button-border: hsl(0, 0%, 9%);
@@ -70,8 +70,8 @@
   --destructive-foreground: hsl(0, 0%, 98%);
   --ring: hsl(240, 4.9%, 83.9%);
 
-  /* Contact button colors for dark theme */
-  --contact-button-bg: hsl(270, 85%, 60%);
+  /* Contact button colors for dark theme - matches social icon background */
+  --contact-button-bg: rgba(0, 0, 0, 0.25);
   --contact-button-text: hsl(0, 0%, 98%);
   --resume-button-bg: transparent;
   --resume-button-text: hsl(0, 0%, 98%);
@@ -485,11 +485,7 @@
     background-clip: text;
   }
 
-  .contact-button {
-    background: var(--contact-button-bg);
-    color: var(--contact-button-text);
-    border: 2px solid var(--contact-button-bg);
-  }
+  /* Contact button styling now handled in unified 3D button effects section */
 
   .resume-button {
     background: var(--resume-button-bg);
@@ -950,7 +946,34 @@
   }
 
   /* Unified 3D Button Effects for Contact and Resume */
-  .contact-button,
+  .contact-button {
+    /* Light mode - matches social icon glassmorphism */
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 2px solid rgba(255, 255, 255, 0.25) !important;
+    color: hsl(0, 0%, 9%) !important;
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+
+  .dark .contact-button {
+    /* Dark mode - matches social icon glassmorphism */
+    background: rgba(0, 0, 0, 0.25) !important;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: hsl(0, 0%, 98%) !important;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.3),
+      0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
   .resume-button {
     transform-style: preserve-3d;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -963,18 +986,45 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 
-  .contact-button:hover,
+  .contact-button:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  .dark .contact-button:hover {
+    background: rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
   .resume-button:hover {
     transform: translateY(-1px);
     box-shadow:
       0 4px 12px rgba(0, 0, 0, 0.15),
       0 2px 6px rgba(0, 0, 0, 0.1),
+      0 0 20px hsla(0, 0%, 9%, 0.15),
       inset 0 1px 0 rgba(255, 255, 255, 0.2),
       0 0 0 1px rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.3);
   }
 
-  .contact-button:active,
+  .contact-button:active {
+    transform: translateY(0);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark .contact-button:active {
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+
   .resume-button:active {
     transform: translateY(0);
     box-shadow:
@@ -991,13 +1041,19 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, hsla(255, 255%, 255%, 0.15), transparent);
+    background: linear-gradient(90deg, transparent, hsla(0, 0%, 98%, 0.3), transparent);
     transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .contact-button:hover::before,
   .resume-button:hover::before {
     left: 100%;
+  }
+
+  /* Light mode - use button text color for visible left-to-right transition */
+  :not(.dark) .contact-button::before,
+  :not(.dark) .resume-button::before {
+    background: linear-gradient(90deg, transparent, hsla(0, 0%, 9%, 0.3), transparent);
   }
 
   /* Light mode specific styles for resume button - override shared styles */
@@ -1007,6 +1063,21 @@
       0 2px 8px rgba(0, 0, 0, 0.08),
       0 1px 3px rgba(0, 0, 0, 0.05),
       inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  }
+
+  /* Light mode hover for resume button - make background change visible */
+  :not(.dark) .resume-button:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Dark mode hover for resume button - add text color box-shadow */
+  .dark .resume-button:hover {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.4),
+      0 2px 6px rgba(0, 0, 0, 0.25),
+      0 0 20px hsla(0, 0%, 98%, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
   }
 
 
@@ -1049,6 +1120,42 @@
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  }
+
+  /* Apple Design Language Modal Close Button */
+  .modal-close-button {
+    /* Light mode */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .dark .modal-close-button {
+    /* Dark mode */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+  }
+
+  .modal-close-button:hover {
+    /* Light mode hover */
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.15);
+    transform: scale(1.05);
+  }
+
+  .dark .modal-close-button:hover {
+    /* Dark mode hover */
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+
+  .modal-close-button:active {
+    transform: scale(0.95);
   }
 
   /* Input and textarea glassomorphism enhancement */

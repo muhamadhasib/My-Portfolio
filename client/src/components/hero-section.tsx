@@ -165,7 +165,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
             >
               <Button
                 onClick={onContactClick}
-                className="contact-button responsive-button hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-[hsl(270,85%,60%)]/25 flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
+                className="contact-button responsive-button hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
               >
                 <motion.div
                   whileHover={{ rotateY: 15, rotateX: -15 }}
@@ -272,7 +272,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
             >
               <Button
                 onClick={onContactClick}
-                className="contact-button responsive-button hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-[hsl(270,85%,60%)]/25 flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
+                className="contact-button responsive-button hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
               >
                 <motion.div
                   whileHover={{ rotateY: 15, rotateX: -15 }}
