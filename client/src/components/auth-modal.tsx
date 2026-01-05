@@ -76,13 +76,13 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md bg-black/95 backdrop-blur-xl border border-gray-800/50">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <DialogTitle className="text-2xl font-bold text-center text-foreground">
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="flex items-center justify-center gap-2"
             >
-              <Lock className="w-6 h-6 text-blue-400" />
+              <Lock className="w-6 h-6 text-foreground opacity-80" />
               {isLogin ? 'Admin Access' : 'Create Admin'}
             </motion.div>
           </DialogTitle>
@@ -145,7 +145,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:scale-[1.02]"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold py-3 rounded-lg transition-all duration-200 transform hover:scale-[1.02]"
             >
               {isLoading ? (
                 <motion.div

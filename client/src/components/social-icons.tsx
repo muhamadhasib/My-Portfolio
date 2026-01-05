@@ -14,31 +14,31 @@ export function SocialIcons({ className = "" }: SocialIconsProps) {
       icon: Github,
       href: "https://github.com/muhamadhasib",
       label: "GitHub",
-      hoverColor: "hover:text-[hsl(270,85%,60%)] hover:shadow-[hsl(270,85%,60%)]/25",
+      hoverColor: "hover:opacity-100",
     },
     {
       icon: Linkedin,
       href: "https://www.linkedin.com/in/muhammadhasib/",
       label: "LinkedIn",
-      hoverColor: "hover:text-[hsl(188,95%,44%)] hover:shadow-[hsl(188,95%,44%)]/25",
+      hoverColor: "hover:opacity-100",
     },
     {
       icon: Twitter,
       href: "https://x.com/hasib_me_",
       label: "Twitter",
-      hoverColor: "hover:text-[hsl(328,85%,70%)] hover:shadow-[hsl(328,85%,70%)]/25",
+      hoverColor: "hover:opacity-100",
     },
     {
       icon: Mail,
       href: "mailto:muhammadhasib.me@gmail.com",
       label: "Gmail",
-      hoverColor: "hover:text-[hsl(214,95%,58%)] hover:shadow-[hsl(214,95%,58%)]/25",
+      hoverColor: "hover:opacity-100",
     },
     {
       icon: MapPin,
       href: "https://maps.google.com/?q=Dhaka,Bangladesh",
       label: "Location",
-      hoverColor: "hover:text-[hsl(200,95%,50%)] hover:shadow-[hsl(200,95%,50%)]/25",
+      hoverColor: "hover:opacity-100",
     },
   ];
 

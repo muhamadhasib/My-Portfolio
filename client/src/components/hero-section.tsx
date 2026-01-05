@@ -27,7 +27,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
       category: "resume",
       label: "hero_section",
     });
-    
+
     // Download the actual resume PDF
     const link = document.createElement('a');
     link.href = '/assets/documents/Muhammad_Hasib_Resume.pdf';
@@ -44,7 +44,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
     <article className="content-section overflow-visible" role="article" aria-labelledby="hero-heading">
       <div className="content-width-limit max-container overflow-visible">
         {/* Schema.org structured data for better SEO */}
-        <script 
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -57,9 +57,9 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
                 "description": bioText,
                 "url": "https://muhammadhasib.dev",
                 "knowsAbout": [
-                  "Artificial Intelligence", 
-                  "Machine Learning", 
-                  "Neural Networks", 
+                  "Artificial Intelligence",
+                  "Machine Learning",
+                  "Neural Networks",
                   "Deep Learning",
                   "Python Programming",
                   "JavaScript Development",
@@ -77,7 +77,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
             })
           }}
         />
-        
+
         {/* Desktop Layout - Foldable Optimized */}
         <div className="desktop-grid overflow-visible foldable-container">
           {/* Left Side: Text Content */}
@@ -86,7 +86,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            style={{ 
+            style={{
               isolation: 'isolate',
               transform: 'translateZ(0)',
               contain: 'layout style'
@@ -103,16 +103,16 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
                 animate={{ rotate: [0, 360] }}
                 transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               >
-                <Star className="w-[clamp(1rem,2.5vw,1.25rem)] h-[clamp(1rem,2.5vw,1.25rem)] text-[hsl(270,85%,60%)]" />
+                <Star className="w-[clamp(1rem,2.5vw,1.25rem)] h-[clamp(1rem,2.5vw,1.25rem)] text-foreground opacity-60" />
               </motion.div>
-              <p className="responsive-welcome text-gray-600 dark:text-gray-400">
+              <p className="responsive-welcome text-muted-foreground">
                 Welcome to my space
               </p>
               <motion.div
                 animate={{ rotate: [360, 0] }}
                 transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               >
-                <Star className="w-[clamp(1rem,2.5vw,1.25rem)] h-[clamp(1rem,2.5vw,1.25rem)] text-[hsl(188,95%,44%)]" />
+                <Star className="w-[clamp(1rem,2.5vw,1.25rem)] h-[clamp(1rem,2.5vw,1.25rem)] text-foreground opacity-60" />
               </motion.div>
             </motion.div>
 
@@ -120,7 +120,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
             <div className="home-section-spacing">
               <motion.h1
                 id="hero-heading"
-                className="responsive-name font-bold gradient-text name-single-line"
+                className="responsive-name font-bold text-foreground name-single-line"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
@@ -129,8 +129,8 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
               >
                 Muhammad Hasib
               </motion.h1>
-              <div 
-                className="responsive-role font-medium text-gray-700 dark:text-gray-300 typing-container-isolated"
+              <div
+                className="responsive-role font-medium text-foreground opacity-80 typing-container-isolated"
                 role="heading"
                 aria-level={2}
                 aria-label="Professional roles"
@@ -141,7 +141,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
 
             {/* Bio - Justified for All Devices */}
             <motion.p
-              className="responsive-bio text-gray-600 dark:text-gray-400 bio-full-width bio-text-isolation"
+              className="responsive-bio text-muted-foreground bio-full-width bio-text-isolation"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -178,7 +178,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
 
               <Button
                 onClick={handleResumeDownload}
-                className="resume-button responsive-button hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-[hsl(270,85%,60%)]/25 flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
+                className="resume-button responsive-button hover:scale-105 transition-all duration-300 hover:shadow-xl flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
               >
                 <motion.div
                   whileHover={{ rotateY: -15, rotateX: 15 }}
@@ -235,29 +235,29 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
                 animate={{ rotate: [0, 360] }}
                 transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               >
-                <Star className="w-[clamp(0.875rem,2vw,1rem)] h-[clamp(0.875rem,2vw,1rem)] text-[hsl(270,85%,60%)]" />
+                <Star className="w-[clamp(0.875rem,2vw,1rem)] h-[clamp(0.875rem,2vw,1rem)] text-foreground opacity-60" />
               </motion.div>
-              <p className="responsive-welcome text-gray-600 dark:text-gray-400">
+              <p className="responsive-welcome text-muted-foreground">
                 Welcome to my space
               </p>
               <motion.div
                 animate={{ rotate: [360, 0] }}
                 transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               >
-                <Star className="w-[clamp(0.875rem,2vw,1rem)] h-[clamp(0.875rem,2vw,1rem)] text-[hsl(188,95%,44%)]" />
+                <Star className="w-[clamp(0.875rem,2vw,1rem)] h-[clamp(0.875rem,2vw,1rem)] text-foreground opacity-60" />
               </motion.div>
             </motion.div>
 
             <div className="home-section-spacing text-center lg:text-left">
-              <h1 className="responsive-name font-bold gradient-text name-single-line">
+              <h1 className="responsive-name font-bold text-foreground name-single-line">
                 Muhammad Hasib
               </h1>
-              <div className="responsive-role font-medium text-gray-700 dark:text-gray-300 typing-container">
+              <div className="responsive-role font-medium text-foreground opacity-80 typing-container">
                 <Typewriter texts={roles} className="w-full" />
               </div>
             </div>
 
-            <p className="responsive-bio text-gray-600 dark:text-gray-400 leading-relaxed text-center lg:text-left max-w-lg mx-auto lg:mx-0 text-justify-mobile">
+            <p className="responsive-bio text-muted-foreground leading-relaxed text-center lg:text-left max-w-lg mx-auto lg:mx-0 text-justify-mobile">
               {bioText}
             </p>
 
@@ -285,7 +285,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
 
               <Button
                 onClick={handleResumeDownload}
-                className="resume-button responsive-button hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-[hsl(270,85%,60%)]/25 flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
+                className="resume-button responsive-button hover:scale-105 transition-all duration-300 hover:shadow-xl flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
               >
                 <motion.div
                   whileHover={{ rotateY: -15, rotateX: 15 }}

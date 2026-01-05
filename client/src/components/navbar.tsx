@@ -24,7 +24,7 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
         <div className="w-full flex justify-between items-center h-full">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="text-2xl font-bold gradient-text"
+              className="text-2xl font-bold text-foreground"
             >
               MH
             </motion.div>

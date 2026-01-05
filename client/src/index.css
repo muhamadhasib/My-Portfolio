@@ -2,33 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Anthropic-Style Fonts - Inter for headings/UI, Source Serif Pro for body text */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
 :root {
   --background: hsl(0, 0%, 100%);
-  --foreground: hsl(20, 14.3%, 4.1%);
-  --muted: hsl(60, 4.8%, 95.9%);
-  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --foreground: hsl(0, 0%, 9%);
+  --muted: hsl(0, 0%, 96%);
+  --muted-foreground: hsl(0, 0%, 45%);
   --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --popover-foreground: hsl(0, 0%, 9%);
   --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(20, 14.3%, 4.1%);
-  --border: hsl(20, 5.9%, 90%);
-  --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(270, 85%, 60%);
-  --primary-foreground: hsl(210, 100%, 98%);
-  --secondary: hsl(60, 4.8%, 95.9%);
-  --secondary-foreground: hsl(24, 9.8%, 10%);
-  --accent: hsl(60, 4.8%, 95.9%);
-  --accent-foreground: hsl(24, 9.8%, 10%);
-  --destructive: hsl(0, 84.2%, 60.2%);
-  --destructive-foreground: hsl(60, 9.1%, 97.8%);
-  --ring: hsl(20, 14.3%, 4.1%);
+  --card-foreground: hsl(0, 0%, 9%);
+  --border: hsl(0, 0%, 90%);
+  --input: hsl(0, 0%, 90%);
+  --primary: hsl(0, 0%, 9%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(0, 0%, 96%);
+  --secondary-foreground: hsl(0, 0%, 9%);
+  --accent: hsl(0, 0%, 96%);
+  --accent-foreground: hsl(0, 0%, 9%);
+  --destructive: hsl(0, 0%, 50%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(0, 0%, 9%);
   --radius: 0.5rem;
-
-  /* Neural theme colors */
-  --neural-purple: hsl(270, 85%, 60%);
-  --neural-cyan: hsl(188, 95%, 44%);
-  --neural-pink: hsl(328, 85%, 70%);
-  --neural-blue: hsl(214, 95%, 58%);
 
   /* Consistent spacing for home section text elements */
   --home-section-spacing: clamp(0.875rem, 2vw, 1.5rem);
@@ -50,25 +47,25 @@
 }
 
 .dark {
-  --background: hsl(240, 10%, 3.9%);
+  --background: hsl(0, 0%, 3%);
   --foreground: hsl(0, 0%, 98%);
-  --muted: hsl(240, 3.7%, 15.9%);
-  --muted-foreground: hsl(240, 5%, 64.9%);
-  --popover: hsl(240, 10%, 3.9%);
+  --muted: hsl(0, 0%, 10%);
+  --muted-foreground: hsl(0, 0%, 65%);
+  --popover: hsl(0, 0%, 3%);
   --popover-foreground: hsl(0, 0%, 98%);
-  --card: hsl(240, 10%, 3.9%);
+  --card: hsl(0, 0%, 3%);
   --card-foreground: hsl(0, 0%, 98%);
-  --border: hsl(240, 3.7%, 15.9%);
-  --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(270, 85%, 60%);
-  --primary-foreground: hsl(210, 100%, 98%);
-  --secondary: hsl(240, 3.7%, 15.9%);
+  --border: hsl(0, 0%, 20%);
+  --input: hsl(0, 0%, 20%);
+  --primary: hsl(0, 0%, 98%);
+  --primary-foreground: hsl(0, 0%, 9%);
+  --secondary: hsl(0, 0%, 10%);
   --secondary-foreground: hsl(0, 0%, 98%);
-  --accent: hsl(240, 3.7%, 15.9%);
+  --accent: hsl(0, 0%, 10%);
   --accent-foreground: hsl(0, 0%, 98%);
-  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive: hsl(0, 0%, 50%);
   --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(240, 4.9%, 83.9%);
+  --ring: hsl(0, 0%, 98%);
 
   /* Contact button colors for dark theme - matches social icon background */
   --contact-button-bg: rgba(0, 0, 0, 0.25);
@@ -90,7 +87,6 @@
   * {
     @apply border-border;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
   }
 
   html,
@@ -100,12 +96,12 @@
     overflow: hidden;
     height: 100vh;
     width: 100vw;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-family: 'Source Serif Pro', Georgia, serif !important;
   }
 
   body {
-    @apply font-sans antialiased text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    @apply font-serif antialiased text-foreground;
+    font-family: 'Source Serif Pro', Georgia, serif !important;
     /* Unified background for entire website */
     background:
       radial-gradient(circle at 20% 50%, hsla(270, 85%, 60%, 0.15) 0%, transparent 50%),
@@ -120,29 +116,44 @@
     height: 100vh;
     width: 100vw;
     position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
   }
 
-  /* Ensure all text elements use Apple font */
-  p,
+  /* Anthropic Sans-style font for headings */
   h1,
   h2,
   h3,
   h4,
   h5,
-  h6,
-  span,
-  div,
-  a,
+  h6 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  /* Anthropic Serif-style font for body text */
+  p {
+    font-family: 'Source Serif Pro', Georgia, serif !important;
+  }
+
+  /* Anthropic Sans-style font for UI elements */
   button,
   input,
   textarea,
   select,
   label,
+  nav,
+  .nav-link {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+  }
+
+  /* Spans and divs inherit from parent */
+  span,
+  div,
+  a,
   li,
   td,
   th {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-family: inherit;
   }
 }
 
@@ -256,7 +267,7 @@
 
   /* Revolutionary Fluid Typography System for All Devices */
   .responsive-name {
-    font-size: clamp(1.25rem, 3.5vw + 0.5rem, 4.5rem);
+    font-size: clamp(1.25rem, 3vw + 0.4rem, 3.5rem);
     line-height: clamp(1.05, 0.8vw + 0.95, 1.15);
     font-weight: 700;
     letter-spacing: clamp(-0.03em, -0.01vw, -0.02em);
@@ -478,12 +489,7 @@
     width: 100%;
   }
 
-  .gradient-text {
-    background: linear-gradient(135deg, hsl(270, 85%, 60%), hsl(188, 95%, 44%), hsl(328, 85%, 70%));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  /* Removed gradient-text - using neutral colors only */
 
   /* Contact button styling now handled in unified 3D button effects section */
 
@@ -637,12 +643,10 @@
 
   .contact-icon-3d {
     /* Light mode glassomorphism */
-    background: linear-gradient(135deg,
-        hsla(270, 85%, 60%, 0.15) 0%,
-        hsla(188, 95%, 44%, 0.15) 100%);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 2px solid hsla(270, 85%, 60%, 0.25);
+    border: 2px solid rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
     box-shadow:
@@ -654,12 +658,10 @@
 
   .dark .contact-icon-3d {
     /* Dark mode glassomorphism */
-    background: linear-gradient(135deg,
-        hsla(270, 85%, 60%, 0.2) 0%,
-        hsla(188, 95%, 44%, 0.2) 100%);
+    background: rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 2px solid hsla(270, 85%, 60%, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.15);
     box-shadow:
       0 4px 16px rgba(0, 0, 0, 0.3),
       0 1px 4px rgba(0, 0, 0, 0.2),
@@ -667,20 +669,20 @@
   }
 
   .contact-icon-3d:hover {
-    background: linear-gradient(135deg,
-        hsl(270, 85%, 60%) 0%,
-        hsl(188, 95%, 44%) 100%);
-    border-color: transparent;
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.2);
     box-shadow:
-      0 15px 35px hsla(270, 85%, 60%, 0.4),
-      0 5px 15px hsla(188, 95%, 44%, 0.3),
+      0 15px 35px rgba(0, 0, 0, 0.15),
+      0 5px 15px rgba(0, 0, 0, 0.1),
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 
   .dark .contact-icon-3d:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
     box-shadow:
-      0 15px 35px hsla(270, 85%, 60%, 0.5),
-      0 5px 15px hsla(188, 95%, 44%, 0.4),
+      0 15px 35px rgba(0, 0, 0, 0.4),
+      0 5px 15px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
@@ -1092,7 +1094,7 @@
       0 8px 32px rgba(0, 0, 0, 0.12),
       0 2px 8px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   }
 
   .dark .modal-glass {
@@ -1104,7 +1106,7 @@
       0 8px 32px rgba(0, 0, 0, 0.4),
       0 2px 8px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   }
 
   /* Modal content container for better readability */
@@ -1112,14 +1114,14 @@
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   }
 
   .dark .modal-content-glass {
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   }
 
   /* Apple Design Language Modal Close Button */
@@ -1181,18 +1183,18 @@
   textarea.glass-card:focus {
     outline: none;
     background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(139, 92, 246, 0.5);
+    border-color: rgba(0, 0, 0, 0.3);
     box-shadow:
-      0 0 0 3px rgba(139, 92, 246, 0.2),
+      0 0 0 3px rgba(0, 0, 0, 0.1),
       0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .dark input.glass-card:focus,
   .dark textarea.glass-card:focus {
     background: rgba(0, 0, 0, 0.35);
-    border-color: rgba(139, 92, 246, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
     box-shadow:
-      0 0 0 3px rgba(139, 92, 246, 0.2),
+      0 0 0 3px rgba(255, 255, 255, 0.1),
       0 2px 8px rgba(0, 0, 0, 0.3);
   }
 
@@ -1247,19 +1249,25 @@
   .contact-icon-3d:hover {
     transform: translateY(-5px) rotateX(15deg) rotateY(15deg);
     box-shadow:
-      0 20px 40px hsla(270, 85%, 60%, 0.4),
-      0 10px 20px hsla(270, 85%, 60%, 0.2);
+      0 20px 40px rgba(0, 0, 0, 0.2),
+      0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .contact-icon-3d:hover {
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 10px 20px rgba(0, 0, 0, 0.2);
   }
 
   @keyframes gentle-pulse {
 
     0%,
     100% {
-      box-shadow: 0 0 0 0 hsla(188, 95%, 44%, 0.4);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
     }
 
     50% {
-      box-shadow: 0 0 0 10px hsla(188, 95%, 44%, 0);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
     }
   }
 
@@ -1664,11 +1672,11 @@
 
 @keyframes pulse-glow {
   0% {
-    box-shadow: 0 0 5px hsla(270, 85%, 60%, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
 
   100% {
-    box-shadow: 0 0 20px hsla(270, 85%, 60%, 0.8), 0 0 40px hsla(188, 95%, 44%, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -1768,4 +1776,86 @@
 
 .animate-bounce-soft {
   animation: bounce-soft 0.6s ease-out;
+}
+
+/* Shared width constraint for Hero Section elements (Name, Bio, Buttons) */
+.hero-content-constraint {
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Ultra-Wide Displays (2560px+) */
+@media (min-width: 2560px) {
+  .hero-content-constraint {
+    max-width: 75%;
+    width: 75%;
+  }
+}
+
+/* Wide Desktop (1440px-2559px) */
+@media (min-width: 1440px) and (max-width: 2559px) {
+  .hero-content-constraint {
+    max-width: 80%;
+    width: 80%;
+  }
+}
+
+/* Standard Desktop (1200px-1439px) */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .hero-content-constraint {
+    max-width: 80%;
+    width: 80%;
+  }
+}
+
+/* Laptop (1024px-1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .hero-content-constraint {
+    max-width: 80%;
+    width: 80%;
+  }
+}
+
+/* Foldable Portrait & Small Tablets (853px-1023px) */
+@media (min-width: 853px) and (max-width: 1023px) {
+  .hero-content-constraint {
+    max-width: 90%;
+    width: 90%;
+    padding: 0 1rem;
+  }
+}
+
+/* Tablet Landscape (768px-852px) */
+@media (min-width: 768px) and (max-width: 852px) {
+  .hero-content-constraint {
+    max-width: 95%;
+    width: 95%;
+    padding: 0 0.75rem;
+  }
+}
+
+/* Mobile Landscape & Small Tablets (576px-767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .hero-content-constraint {
+    max-width: 100%;
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+}
+
+/* Mobile Portrait (320px-575px) */
+@media (min-width: 320px) and (max-width: 575px) {
+  .hero-content-constraint {
+    max-width: 100%;
+    width: 100%;
+    padding: 0 0.25rem;
+  }
+}
+
+/* Micro Devices (<320px) */
+@media (max-width: 319px) {
+  .hero-content-constraint {
+    max-width: 100%;
+    width: 100%;
+  }
 }

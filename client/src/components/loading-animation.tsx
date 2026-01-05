@@ -35,8 +35,8 @@ export function LoadingAnimation() {
             {characters.map((char, index) => (
               <motion.span
                 key={index}
-                className="text-2xl lg:text-3xl font-medium text-gray-800 dark:text-gray-200 tracking-wide inline-block"
-                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
+                className="text-2xl lg:text-3xl font-medium text-foreground tracking-wide inline-block"
+                style={{ fontFamily: "'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif" }}
                 initial={{ opacity: 0, transform: "translateY(4px) scale(0.95)" }}
                 animate={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
                 transition={{

@@ -33,9 +33,9 @@ export function AdminPanel() {
     >
       <Card className="bg-black/95 backdrop-blur-xl border border-gray-800/50 min-w-[280px]">
         <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <Shield className="w-5 h-5 text-green-400" />
-            <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+          <CardTitle className="flex items-center gap-2 text-lg text-foreground">
+            <Shield className="w-5 h-5 text-foreground opacity-80" />
+            <span>
               Admin Panel
             </span>
           </CardTitle>
@@ -56,8 +56,8 @@ export function AdminPanel() {
               <Database className="w-3 h-3" />
               <span>Database</span>
             </div>
-            <div className="flex items-center gap-2 text-green-400">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <div className="flex items-center gap-2 text-foreground opacity-80">
+              <div className="w-2 h-2 bg-foreground opacity-60 rounded-full animate-pulse"></div>
               <span>Online</span>
             </div>
           </div>
@@ -66,7 +66,7 @@ export function AdminPanel() {
             onClick={handleLogout}
             variant="outline"
             size="sm"
-            className="w-full bg-gray-900/50 border-gray-700 text-gray-300 hover:bg-red-900/30 hover:border-red-700 hover:text-red-300 transition-all duration-200"
+            className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/80 border-border transition-all duration-200"
           >
             <LogOut className="w-4 h-4 mr-2" />
             Sign Out

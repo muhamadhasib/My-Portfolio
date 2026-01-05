@@ -70,19 +70,9 @@ export function Avatar3D() {
           ease: "easeInOut",
         }}
       >
-        {/* Gradient Border Ring */}
+        {/* Neutral Border Ring */}
         <motion.div
-          className="absolute w-full h-full rounded-full p-1 overflow-visible"
-          style={{
-            background: `conic-gradient(
-              from 0deg,
-              hsl(270, 85%, 60%) 0%,
-              hsl(188, 95%, 44%) 25%,
-              hsl(328, 85%, 70%) 50%,
-              hsl(214, 95%, 58%) 75%,
-              hsl(270, 85%, 60%) 100%
-            )`,
-          }}
+          className="absolute w-full h-full rounded-full p-1 overflow-visible border-2 border-border"
           animate={{ 
             scale: isHovered ? [1, 1.05, 1] : 1,
           }}

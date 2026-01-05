@@ -25,7 +25,10 @@ export default {
       'mobile-large': { 'raw': '(min-width: 425px) and (max-width: 767px)' },
     },
     fontFamily: {
-      sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+      sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+      display: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+      body: ['Source Serif Pro', 'Georgia', 'serif'],
+      serif: ['Source Serif Pro', 'Georgia', 'serif'],
     },
     extend: {
       borderRadius: {
