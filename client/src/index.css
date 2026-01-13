@@ -27,6 +27,16 @@
   --ring: hsl(0, 0%, 9%);
   --radius: 0.5rem;
 
+  /* Apple-style Animation Variables */
+  --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --duration-fast: 200ms;
+  --duration-medium: 400ms;
+  --duration-slow: 600ms;
+
+  /* Apple-style gray for name text - matches role text color */
+  --name-text-color: hsla(0, 0%, 9%, 0.8);
+
   /* Consistent spacing for home section text elements */
   --home-section-spacing: clamp(0.875rem, 2vw, 1.5rem);
 
@@ -66,6 +76,9 @@
   --destructive: hsl(0, 0%, 50%);
   --destructive-foreground: hsl(0, 0%, 98%);
   --ring: hsl(0, 0%, 98%);
+
+  /* Apple-style gray for name text - matches role text color */
+  --name-text-color: hsla(0, 0%, 98%, 0.8);
 
   /* Contact button colors for dark theme - matches social icon background */
   --contact-button-bg: rgba(0, 0, 0, 0.25);
@@ -159,6 +172,14 @@
 
 @layer utilities {
 
+  /* Hardware acceleration for smoother animations */
+  .will-change-transform {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+
   /* Container with max-width constraint - strictly enforce 1400px */
   .max-container {
     max-width: 1400px !important;
@@ -212,7 +233,7 @@
   /* Responsive width adjustments */
   @media (max-width: 768px) {
     .navbar-glass {
-      width: calc(100% - clamp(0.5rem, 2vw, 1rem));
+      width: calc(100% - clamp(2rem, 5vw, 3rem));
       border-radius: 9999px;
       height: clamp(40px, 5.5vh, 60px);
       padding: 0 clamp(0.5rem, 1vw, 1rem);
@@ -273,6 +294,7 @@
     letter-spacing: clamp(-0.03em, -0.01vw, -0.02em);
     word-break: keep-all;
     overflow-wrap: normal;
+    color: var(--name-text-color);
   }
 
   .responsive-role {
@@ -326,7 +348,8 @@
   }
 
   /* Mobile Layout System */
-  .desktop-layout {
+  .desktop-layout,
+  .desktop-grid {
     display: none;
   }
 
@@ -360,6 +383,10 @@
   @media (min-width: 853px) {
     .desktop-layout {
       display: block;
+    }
+
+    .desktop-grid {
+      display: grid;
     }
 
     .mobile-layout {
@@ -442,6 +469,7 @@
     padding: clamp(0.75rem, 1.5vw + 0.25rem, 1.25rem) clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
     font-size: clamp(0.825rem, 1.2vw + 0.3rem, 1.125rem);
     border-radius: clamp(0.75rem, 2vw, 1.5rem);
+    min-width: clamp(140px, 20vw, 180px);
   }
 
   /* Universal Spacing System */
@@ -491,12 +519,57 @@
 
   /* Removed gradient-text - using neutral colors only */
 
-  /* Contact button styling now handled in unified 3D button effects section */
-
+  /* Contact and Resume Button Styling */
   .resume-button {
     background: var(--resume-button-bg);
     color: var(--resume-button-text);
     border: 2px solid var(--resume-button-border);
+  }
+
+  /* Apple Design Box Shadows for Action Buttons */
+  .contact-button,
+  .resume-button {
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.12),
+      0 1px 3px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .dark .contact-button,
+  .dark .resume-button {
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  }
+
+  .contact-button:hover,
+  .resume-button:hover {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.15),
+      0 2px 6px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-1px);
+  }
+
+  .dark .contact-button:hover,
+  .dark .resume-button:hover {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.5),
+      0 2px 6px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .contact-button:active,
+  .resume-button:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transform: translateY(0) scale(0.98);
+  }
+
+  .dark .contact-button:active,
+  .dark .resume-button:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   /* Apple Design Language Newsletter Button - Matches Navbar */
@@ -515,11 +588,46 @@
       0 2px 8px rgba(0, 0, 0, 0.12),
       0 1px 3px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition:
+      transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
+    z-index: 1;
     font-weight: 500;
     letter-spacing: -0.01em;
+  }
+
+  /* Pseudo-element for left-to-right hover sweep effect */
+  .apple-newsletter-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.06);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .dark .apple-newsletter-button::before {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Hover: sweep from left to right */
+  .apple-newsletter-button:hover::before {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  /* Exit: sweep from right to left (reverse origin on mouse leave) */
+  .apple-newsletter-button:not(:hover)::before {
+    transform: scaleX(0);
+    transform-origin: right center;
   }
 
   .dark .apple-newsletter-button {
@@ -537,10 +645,8 @@
   }
 
   .apple-newsletter-button:hover {
-    transform: translateY(-0.5px);
-    background: rgba(255, 255, 255, 0.15) !important;
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-1px);
+    border-color: rgba(0, 0, 0, 0.18) !important;
     box-shadow:
       0 4px 12px rgba(0, 0, 0, 0.15),
       0 2px 6px rgba(0, 0, 0, 0.1),
@@ -548,22 +654,22 @@
   }
 
   .dark .apple-newsletter-button:hover {
-    background: rgba(0, 0, 0, 0.35) !important;
-    background-color: rgba(0, 0, 0, 0.35) !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.25) !important;
     box-shadow:
       0 4px 12px rgba(0, 0, 0, 0.5),
       0 2px 6px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   .apple-newsletter-button:active {
-    transform: translateY(0);
+    transform: translateY(0) scale(0.98);
     box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
   .dark .apple-newsletter-button:active {
+    transform: translateY(0) scale(0.98);
     box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.3);
   }
@@ -713,7 +819,73 @@
       text-justify: inter-character;
       word-spacing: -0.05em;
     }
+
+    /* iPhone SE & Small Mobile Tweaks */
+    .responsive-name {
+      font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    }
+
+    .responsive-role {
+      font-size: clamp(0.9rem, 4vw, 1.1rem) !important;
+    }
   }
+
+  /* Nest Hub & Short Screen Optimization (Landscape) */
+  @media (max-height: 600px) and (min-width: 600px) {
+    .home-section-spacing>*+* {
+      margin-top: 0.5rem !important;
+    }
+
+    .avatar-mobile-size {
+      width: clamp(140px, 20vh, 180px);
+      height: clamp(140px, 20vh, 180px);
+    }
+
+    /* Allow scrolling instead of clipping */
+    body,
+    html {
+      overflow-y: auto !important;
+      height: auto !important;
+    }
+
+    .mobile-layout {
+      padding: 0.5rem 0;
+    }
+  }
+
+  /* Foldable & Tablet Specifics */
+
+  /* iPad Mini / Surface Duo (Portrait) */
+  @media (min-width: 768px) and (max-width: 900px) {
+    .responsive-name {
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+  }
+
+  /* Galaxy Z Fold 5 (Unfolded) & Small Tablets */
+  @media (min-width: 600px) and (max-width: 852px) {
+    .mobile-layout {
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    .avatar-container {
+      margin-bottom: 1rem;
+    }
+  }
+
+  /* Large Tablets (iPad Pro/Air) & Small Laptops */
+  @media (min-width: 900px) and (max-width: 1200px) {
+    .max-container {
+      padding: 0 2rem;
+    }
+
+    .desktop-grid {
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+    }
+  }
+
 
   /* Desktop text justification - left aligned on large screens, justified on medium+ */
   .text-justify-desktop {
@@ -895,191 +1067,365 @@
     -webkit-backface-visibility: hidden;
   }
 
-  /* Social Icons Adaptive Styling - Consistent glassomorphism */
+  /* ============================================
+     APPLE DESIGN LANGUAGE - SOCIAL ICONS
+     Premium social icon styling with Apple's design principles:
+     - Minimalist, clean aesthetic
+     - Left-to-right hover sweep transition
+     - Smooth color transitions
+     - Soft shadows for depth
+     - Precise spacing and alignment
+     ============================================ */
+
+  /* Base Social Icon - Clean Minimalist Foundation */
   .social-icon-adaptive {
-    /* Light mode glassomorphism */
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    /* Light mode - subtle, refined appearance */
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+
+    /* Required for pseudo-element positioning */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    /* Apple-style soft box shadow - subtle depth */
     box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.1),
-      0 1px 3px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      0 4px 8px rgba(0, 0, 0, 0.04);
+
+    /* Smooth Apple-style transitions */
+    transition:
+      transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  /* Dark mode social icons */
+  /* Pseudo-element for left-to-right hover sweep effect */
+  .social-icon-adaptive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 50%;
+
+    /* Light mode sweep color */
+    background: rgba(0, 0, 0, 0.06);
+
+    /* Start hidden, scaled to 0 from left */
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Dark mode sweep color */
+  .dark .social-icon-adaptive::before {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Hover: sweep from left to right */
+  .social-icon-adaptive:hover::before {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  /* Exit: sweep from right to left (reverse origin on mouse leave) */
+  .social-icon-adaptive:not(:hover)::before {
+    transform: scaleX(0);
+    transform-origin: right center;
+  }
+
+  /* Dark mode base - clean and minimal */
   .dark .social-icon-adaptive {
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Apple-style soft box shadow for dark mode */
     box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.3),
-      0 1px 3px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      0 1px 2px rgba(0, 0, 0, 0.12),
+      0 2px 4px rgba(0, 0, 0, 0.10),
+      0 4px 8px rgba(0, 0, 0, 0.08);
   }
 
+  /* Hover state - Light mode */
   .social-icon-adaptive:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
+    /* Gentle scale - Apple's signature subtle lift */
+    transform: scale(1.08) translateY(-2px);
+    border-color: rgba(0, 0, 0, 0.12);
+
+    /* Apple-style soft shadow for depth */
     box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.15),
-      0 2px 6px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      0 4px 12px rgba(0, 0, 0, 0.10),
+      0 2px 4px rgba(0, 0, 0, 0.06),
+      0 8px 20px rgba(0, 0, 0, 0.06);
   }
 
+  /* Hover state - Dark mode */
   .dark .social-icon-adaptive:hover {
-    background: rgba(0, 0, 0, 0.35);
-    border-color: rgba(255, 255, 255, 0.2);
+    /* Gentle scale - Apple's signature subtle lift */
+    transform: scale(1.08) translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.18);
+
+    /* Apple-style soft shadow for depth */
     box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.4),
-      0 2px 6px rgba(0, 0, 0, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      0 4px 12px rgba(0, 0, 0, 0.25),
+      0 2px 4px rgba(0, 0, 0, 0.15),
+      0 8px 20px rgba(0, 0, 0, 0.15);
   }
 
+  /* Active/Pressed state - Light mode */
+  .social-icon-adaptive:active {
+    transform: scale(0.96);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    transition-duration: 0.1s;
+  }
+
+  /* Active/Pressed state - Dark mode */
+  .dark .social-icon-adaptive:active {
+    transform: scale(0.96);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transition-duration: 0.1s;
+  }
+
+  /* Focus state for accessibility */
+  .social-icon-adaptive:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 3px rgba(0, 0, 0, 0.1),
+      0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .dark .social-icon-adaptive:focus-visible {
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Icon Color - Light mode */
   .social-icon-color {
-    color: rgba(255, 255, 255, 0.85);
-  }
-
-  .light .social-icon-color {
-    color: rgba(0, 0, 0, 0.75);
-  }
-
-  /* Unified 3D Button Effects for Contact and Resume */
-  .contact-button {
-    /* Light mode - matches social icon glassmorphism */
-    background: rgba(255, 255, 255, 0.15) !important;
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 2px solid rgba(255, 255, 255, 0.25) !important;
-    color: hsl(0, 0%, 9%) !important;
-    transform-style: preserve-3d;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: rgba(0, 0, 0, 0.65);
     position: relative;
-    overflow: hidden;
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.12),
-      0 1px 2px rgba(0, 0, 0, 0.24);
+    z-index: 2;
+
+    /* Smooth transitions for color and scale */
+    transition:
+      color 0.28s cubic-bezier(0.25, 0.1, 0.25, 1),
+      transform 0.28s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
-  .dark .contact-button {
-    /* Dark mode - matches social icon glassmorphism */
-    background: rgba(0, 0, 0, 0.25) !important;
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    color: hsl(0, 0%, 98%) !important;
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.3),
-      0 1px 2px rgba(0, 0, 0, 0.5);
+  /* Icon Color - Dark mode */
+  .dark .social-icon-color {
+    color: rgba(255, 255, 255, 0.7);
   }
 
+  /* Icon Hover - Light mode: grow and darken */
+  .social-icon-adaptive:hover .social-icon-color {
+    color: rgba(0, 0, 0, 0.85);
+    /* Apple-style subtle icon growth */
+    transform: scale(1.12);
+  }
+
+  /* Icon Hover - Dark mode: grow and brighten */
+  .dark .social-icon-adaptive:hover .social-icon-color {
+    color: rgba(255, 255, 255, 0.95);
+    /* Apple-style subtle icon growth */
+    transform: scale(1.12);
+  }
+
+  /* ============================================
+     APPLE DESIGN LANGUAGE BUTTONS
+     Premium button styling with Apple's design principles:
+     - Smooth left-to-right hover transitions
+     - Elegant right-to-left exit animations
+     - Premium box shadows for depth
+     - Clean, refined aesthetics
+     ============================================ */
+
+  /* Base styles for both buttons */
+  .contact-button,
   .resume-button {
-    transform-style: preserve-3d;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    font-weight: 500;
+    letter-spacing: -0.01em;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.1),
-      0 1px 3px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    z-index: 1;
+    transition:
+      transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  .contact-button:hover {
-    transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.25) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    box-shadow:
-      0 4px 6px rgba(0, 0, 0, 0.1),
-      0 2px 4px rgba(0, 0, 0, 0.06);
-  }
-
-  .dark .contact-button:hover {
-    background: rgba(0, 0, 0, 0.35) !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
-    box-shadow:
-      0 4px 6px rgba(0, 0, 0, 0.4),
-      0 2px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  .resume-button:hover {
-    transform: translateY(-1px);
-    box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.15),
-      0 2px 6px rgba(0, 0, 0, 0.1),
-      0 0 20px hsla(0, 0%, 9%, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      0 0 0 1px rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .contact-button:active {
-    transform: translateY(0);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.2);
-  }
-
-  .dark .contact-button:active {
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.4);
-  }
-
-  .resume-button:active {
-    transform: translateY(0);
-    box-shadow:
-      0 1px 4px rgba(0, 0, 0, 0.12),
-      inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Glowing particle effect for buttons */
+  /* Pseudo-element for left-to-right hover sweep effect */
   .contact-button::before,
   .resume-button::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, hsla(0, 0%, 98%, 0.3), transparent);
-    transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
+  /* Hover: sweep from left to right */
   .contact-button:hover::before,
   .resume-button:hover::before {
-    left: 100%;
+    transform: scaleX(1);
+    transform-origin: left center;
   }
 
-  /* Light mode - use button text color for visible left-to-right transition */
-  :not(.dark) .contact-button::before,
-  :not(.dark) .resume-button::before {
-    background: linear-gradient(90deg, transparent, hsla(0, 0%, 9%, 0.3), transparent);
+  /* Exit: sweep from right to left (reverse origin on mouse leave) */
+  .contact-button:not(:hover)::before,
+  .resume-button:not(:hover)::before {
+    transform: scaleX(0);
+    transform-origin: right center;
   }
 
-  /* Light mode specific styles for resume button - override shared styles */
-  :not(.dark) .resume-button {
-    border: 2px solid var(--resume-button-border) !important;
+  /* ---- CONTACT BUTTON (Say Hello) - Filled Style ---- */
+  .contact-button {
+    /* Light mode - elegant filled button with Apple-style shadow */
+    background: rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    color: hsl(0, 0%, 15%) !important;
     box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.08),
-      0 1px 3px rgba(0, 0, 0, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+      0 1px 3px rgba(0, 0, 0, 0.08),
+      0 4px 8px rgba(0, 0, 0, 0.06),
+      0 8px 16px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 
-  /* Light mode hover for resume button - make background change visible */
-  :not(.dark) .resume-button:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
+  .contact-button::before {
+    /* Light mode hover sweep color */
+    background: rgba(0, 0, 0, 0.08);
   }
 
-  /* Dark mode hover for resume button - add text color box-shadow */
+  .dark .contact-button {
+    /* Dark mode - elegant filled button with Apple-style shadow */
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: hsl(0, 0%, 95%) !important;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.08),
+      0 4px 8px rgba(0, 0, 0, 0.06),
+      0 8px 16px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .dark .contact-button::before {
+    /* Dark mode hover sweep color */
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Contact button hover - light mode */
+  .contact-button:hover {
+    border-color: rgba(0, 0, 0, 0.18) !important;
+    transform: translateY(-1px);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 6px 12px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* Contact button hover - dark mode */
+  .dark .contact-button:hover {
+    border-color: rgba(255, 255, 255, 0.18) !important;
+    transform: translateY(-1px);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 6px 12px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* Contact button active/pressed - light mode */
+  .contact-button:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  /* Contact button active/pressed - dark mode */
+  .dark .contact-button:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  /* ---- RESUME BUTTON (My Journey) - Outlined Style ---- */
+  .resume-button {
+    /* Light mode - clean outlined button with subtle Apple-style shadow */
+    background: transparent !important;
+    border: 1.5px solid rgba(0, 0, 0, 0.2) !important;
+    color: hsl(0, 0%, 15%) !important;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 2px 4px rgba(0, 0, 0, 0.02);
+  }
+
+  .resume-button::before {
+    /* Light mode hover sweep color */
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .dark .resume-button {
+    /* Dark mode - clean outlined button with subtle Apple-style shadow */
+    background: transparent !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+    color: hsl(0, 0%, 95%) !important;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.15),
+      0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .resume-button::before {
+    /* Dark mode hover sweep color */
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  /* Resume button hover - light mode */
+  .resume-button:hover {
+    border-color: rgba(0, 0, 0, 0.35) !important;
+    transform: translateY(-1px);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.06),
+      0 4px 8px rgba(0, 0, 0, 0.04),
+      0 8px 16px rgba(0, 0, 0, 0.02);
+  }
+
+  /* Resume button hover - dark mode */
   .dark .resume-button:hover {
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    transform: translateY(-1px);
     box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.4),
-      0 2px 6px rgba(0, 0, 0, 0.25),
-      0 0 20px hsla(0, 0%, 98%, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      0 0 0 1px rgba(255, 255, 255, 0.1);
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      0 4px 8px rgba(0, 0, 0, 0.15),
+      0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Resume button active/pressed - light mode */
+  .resume-button:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Resume button active/pressed - dark mode */
+  .dark .resume-button:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.2);
   }
 
 
@@ -1858,4 +2204,31 @@
     max-width: 100%;
     width: 100%;
   }
+}
+
+/* Adaptive Social Icons for Touch Targets */
+.social-icon-adaptive {
+  min-width: 44px;
+  /* Apple/Accessibility standard recommendation */
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.social-icon-adaptive:hover {
+  transform: translateY(-2px);
+}
+
+.social-icon-adaptive:active {
+  transform: scale(0.95);
+}
+
+/* Ensure icons scale but stay centered */
+.social-icon-color {
+  width: clamp(1.25rem, 5vw, 1.5rem);
+  height: clamp(1.25rem, 5vw, 1.5rem);
+  object-fit: contain;
 }

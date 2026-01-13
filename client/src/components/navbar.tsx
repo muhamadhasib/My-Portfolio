@@ -18,18 +18,18 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="navbar-glass"
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        className="navbar-glass will-change-transform"
       >
         <div className="w-full flex justify-between items-center h-full">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-2xl font-bold text-foreground"
-            >
-              MH
-            </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="text-2xl font-bold text-foreground"
+          >
+            MH
+          </motion.div>
 
-            <div className="flex items-center space-x-[clamp(0.75rem,2vw,1.25rem)]">
+          <div className="flex items-center space-x-[clamp(0.75rem,2vw,1.25rem)]">
             {/* Newsletter Button - Apple Design Language */}
             <motion.div
               whileHover={{ scale: 1.02 }}
@@ -54,7 +54,7 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                   <Zap className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
                 </motion.div>
                 <span className="xs:hidden sm:hidden md:inline lg:hidden xl:inline">Join Newsletter</span>
-                <span className="xs:inline sm:inline md:hidden lg:inline xl:hidden">Join</span>
+                <span className="xs:inline sm:inline md:hidden lg:inline xl:hidden">Newsletter</span>
               </Button>
             </motion.div>
 
@@ -73,13 +73,13 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
               >
                 <motion.div
                   className="relative z-10 flex items-center justify-center"
-                  animate={{ 
+                  animate={{
                     rotate: theme === "light" ? 0 : 180,
                     opacity: theme === "light" ? 1 : 0,
                     scale: theme === "light" ? 1 : 0
                   }}
-                  transition={{ 
-                    duration: 0.35, 
+                  transition={{
+                    duration: 0.35,
                     ease: [0.25, 0.1, 0.25, 1]
                   }}
                 >
@@ -98,13 +98,13 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                 </motion.div>
                 <motion.div
                   className="absolute inset-0 z-10 flex items-center justify-center"
-                  animate={{ 
+                  animate={{
                     rotate: theme === "light" ? -180 : 0,
                     opacity: theme === "light" ? 0 : 1,
                     scale: theme === "light" ? 0 : 1
                   }}
-                  transition={{ 
-                    duration: 0.35, 
+                  transition={{
+                    duration: 0.35,
                     ease: [0.25, 0.1, 0.25, 1]
                   }}
                 >
@@ -123,8 +123,8 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                 </motion.div>
               </Button>
             </motion.div>
-            </div>
           </div>
+        </div>
       </motion.nav>
     </div>
   );

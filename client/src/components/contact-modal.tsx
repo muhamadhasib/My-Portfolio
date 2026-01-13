@@ -27,7 +27,7 @@ interface ContactModalProps {
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const { toast } = useToast();
   const { trackEvent } = useAnalytics();
-  
+
   const {
     register,
     handleSubmit,
@@ -86,16 +86,16 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           onClick={handleBackdropClick}
         >
           {/* Apple Design Language Backdrop - Subtle blur with opacity */}
-          <motion.div 
-            className="absolute inset-0 backdrop-blur-md"
+          <motion.div
+            className="absolute inset-0 backdrop-blur-md will-change-transform"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           >
             {/* Subtle overlay - Light mode: dark overlay, Dark mode: light overlay */}
             <div className="absolute inset-0 bg-black/10 dark:bg-white/5" />
@@ -104,20 +104,20 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           {/* Centered Modal Container */}
           <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
             <motion.div
-              className="relative w-full max-w-lg pointer-events-auto"
-              initial={{ scale: 0.96, opacity: 0, y: 20 }}
+              className="relative w-full max-w-lg pointer-events-auto will-change-transform"
+              initial={{ scale: 0.95, opacity: 0, y: 10 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.96, opacity: 0, y: 20 }}
-              transition={{ 
+              exit={{ scale: 0.95, opacity: 0, y: 10 }}
+              transition={{
                 type: "spring",
-                stiffness: 300,
-                damping: 30,
-                duration: 0.4
+                stiffness: 350,
+                damping: 25,
+                mass: 0.5
               }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Apple-Style Modal Card with Website Gradient Background */}
-              <div 
+              <div
                 className="relative border border-border rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden"
                 style={{
                   background: `

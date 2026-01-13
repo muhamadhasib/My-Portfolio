@@ -18,22 +18,22 @@ export default function Home() {
   useEffect(() => {
     // Track page view
     trackPageView("home");
-    
+
     // Optimize loading time for better TTI (Time to Interactive ≤ 1.5s)
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
       // Set loaded state after loading animation
       setTimeout(() => setIsLoaded(true), 300);
     }, 1500); // 1.5 seconds loading for optimal performance
-    
+
     return () => clearTimeout(loadingTimer);
   }, [trackPageView]);
 
   useEffect(() => {
     // Prevent body scroll when modals are open
-    document.body.style.overflow = 
+    document.body.style.overflow =
       (isContactModalOpen || isNewsletterModalOpen) ? "hidden" : "auto";
-    
+
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -57,18 +57,18 @@ export default function Home() {
       <AnimatePresence>
         {isLoading && <LoadingAnimation />}
       </AnimatePresence>
-      
-      <motion.main 
-        className="main-layout"
+
+      <motion.main
+        className="main-layout will-change-transform"
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         role="main"
         aria-label="Muhammad Hasib AI Engineer Portfolio"
       >
         {/* Skip to main content for accessibility */}
-        <a 
-          href="#main-content" 
+        <a
+          href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-blue-600 text-white px-4 py-2 rounded-md"
           tabIndex={1}
         >
@@ -86,9 +86,9 @@ export default function Home() {
         </header>
 
         {/* Main Content Section */}
-        <section 
+        <section
           id="main-content"
-          role="main" 
+          role="main"
           aria-labelledby="hero-heading"
           className="relative z-10"
         >

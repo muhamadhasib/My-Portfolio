@@ -6,7 +6,7 @@ export function LoadingAnimation() {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center"
+      className="fixed inset-0 z-50 flex items-center justify-center will-change-transform"
       style={{
         background: `
           radial-gradient(circle at 20% 50%, hsla(270, 85%, 60%, 0.15) 0%, transparent 50%),
@@ -26,8 +26,8 @@ export function LoadingAnimation() {
           className="flex items-center justify-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ 
-            duration: 0.35, 
+          transition={{
+            duration: 0.35,
             ease: [0.16, 1, 0.3, 1]
           }}
         >
@@ -43,10 +43,10 @@ export function LoadingAnimation() {
                   duration: 0.35,
                   delay: index * 0.035,
                   ease: [0.16, 1, 0.3, 1],
-                  opacity: { 
-                    duration: 0.25, 
+                  opacity: {
+                    duration: 0.25,
                     delay: index * 0.035,
-                    ease: [0.16, 1, 0.3, 1] 
+                    ease: [0.16, 1, 0.3, 1]
                   }
                 }}
               >

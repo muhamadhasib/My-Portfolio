@@ -94,10 +94,10 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
           >
             {/* Desktop Welcome Text */}
             <motion.div
-              className="flex items-center justify-start space-x-3"
-              initial={{ opacity: 0, y: 20 }}
+              className="flex items-center justify-start space-x-3 will-change-transform"
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <motion.div
                 animate={{ rotate: [0, 360] }}
@@ -120,10 +120,10 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
             <div className="home-section-spacing">
               <motion.h1
                 id="hero-heading"
-                className="responsive-name font-bold text-foreground name-single-line"
-                initial={{ opacity: 0, y: 30 }}
+                className="responsive-name font-bold name-single-line will-change-transform"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
                 role="heading"
                 aria-level={1}
               >
@@ -141,10 +141,10 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
 
             {/* Bio - Justified for All Devices */}
             <motion.p
-              className="responsive-bio text-muted-foreground bio-full-width bio-text-isolation"
-              initial={{ opacity: 0, y: 20 }}
+              className="responsive-bio text-muted-foreground bio-full-width bio-text-isolation will-change-transform"
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               style={{ isolation: 'isolate', transform: 'translateZ(0)' }}
               role="text"
               aria-label="Professional bio and introduction"
@@ -156,36 +156,26 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
 
             {/* Action Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-[clamp(0.75rem,2vw,1.25rem)]"
-              initial={{ opacity: 0, y: 20 }}
+              className="flex flex-col sm:flex-row gap-[clamp(0.75rem,2vw,1.25rem)] will-change-transform"
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               role="group"
               aria-label="Contact and resume actions"
             >
               <Button
                 onClick={onContactClick}
-                className="contact-button responsive-button hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
+                className="contact-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium"
               >
-                <motion.div
-                  whileHover={{ rotateY: 15, rotateX: -15 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <Send className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
-                </motion.div>
+                <Send className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
                 <span>Say Hello</span>
               </Button>
 
               <Button
                 onClick={handleResumeDownload}
-                className="resume-button responsive-button hover:scale-105 transition-all duration-300 hover:shadow-xl flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
+                className="resume-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium"
               >
-                <motion.div
-                  whileHover={{ rotateY: -15, rotateX: 15 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <FileDown className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
-                </motion.div>
+                <FileDown className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
                 <span>My Journey</span>
               </Button>
             </motion.div>
@@ -249,7 +239,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
             </motion.div>
 
             <div className="home-section-spacing text-center lg:text-left">
-              <h1 className="responsive-name font-bold text-foreground name-single-line">
+              <h1 className="responsive-name font-bold name-single-line">
                 Muhammad Hasib
               </h1>
               <div className="responsive-role font-medium text-foreground opacity-80 typing-container">
@@ -272,27 +262,17 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
             >
               <Button
                 onClick={onContactClick}
-                className="contact-button responsive-button hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
+                className="contact-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium"
               >
-                <motion.div
-                  whileHover={{ rotateY: 15, rotateX: -15 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <Send className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
-                </motion.div>
+                <Send className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
                 <span>Say Hello</span>
               </Button>
 
               <Button
                 onClick={handleResumeDownload}
-                className="resume-button responsive-button hover:scale-105 transition-all duration-300 hover:shadow-xl flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium enhanced-3d-button"
+                className="resume-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium"
               >
-                <motion.div
-                  whileHover={{ rotateY: -15, rotateX: 15 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <FileDown className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
-                </motion.div>
+                <FileDown className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
                 <span>My Journey</span>
               </Button>
             </motion.div>
