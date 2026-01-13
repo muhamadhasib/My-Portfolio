@@ -69,9 +69,7 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
+    onClose();
   };
 
   return (

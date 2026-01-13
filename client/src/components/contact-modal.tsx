@@ -73,9 +73,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
+    onClose();
   };
 
   return (
