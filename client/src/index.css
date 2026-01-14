@@ -520,57 +520,7 @@
   /* Removed gradient-text - using neutral colors only */
 
   /* Contact and Resume Button Styling */
-  .resume-button {
-    background: var(--resume-button-bg);
-    color: var(--resume-button-text);
-    border: 2px solid var(--resume-button-border);
-  }
 
-  /* Apple Design Box Shadows for Action Buttons */
-  .contact-button,
-  .resume-button {
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.12),
-      0 1px 3px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .dark .contact-button,
-  .dark .resume-button {
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
-  }
-
-  .contact-button:hover,
-  .resume-button:hover {
-    box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.15),
-      0 2px 6px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
-    transform: translateY(-1px);
-  }
-
-  .dark .contact-button:hover,
-  .dark .resume-button:hover {
-    box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.5),
-      0 2px 6px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-  }
-
-  .contact-button:active,
-  .resume-button:active {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    transform: translateY(0) scale(0.98);
-  }
-
-  .dark .contact-button:active,
-  .dark .resume-button:active {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  }
 
   /* Apple Design Language Newsletter Button - Matches Navbar */
   .apple-newsletter-button {
@@ -1079,9 +1029,9 @@
 
   /* Base Social Icon - Clean Minimalist Foundation */
   .social-icon-adaptive {
-    /* Light mode - subtle, refined appearance */
-    background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    /* Light mode - Match Contact Button Exact Background */
+    background: rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 50%;
 
     /* Required for pseudo-element positioning */
@@ -1089,11 +1039,11 @@
     overflow: hidden;
     z-index: 1;
 
-    /* Apple-style soft box shadow - subtle depth */
+    /* Apple-style soft box shadow - matches contact button */
     box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.04),
-      0 2px 4px rgba(0, 0, 0, 0.04),
-      0 4px 8px rgba(0, 0, 0, 0.04);
+      0 4px 16px rgba(0, 0, 0, 0.1),
+      0 2px 6px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
 
     /* Smooth Apple-style transitions */
     transition:
@@ -1141,53 +1091,62 @@
 
   /* Dark mode base - clean and minimal */
   .dark .social-icon-adaptive {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Background match: exact same white tint as buttons */
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
 
-    /* Apple-style soft box shadow for dark mode */
+    /* Apple-style soft box shadow for dark mode - matches contact button */
     box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.12),
-      0 2px 4px rgba(0, 0, 0, 0.10),
-      0 4px 8px rgba(0, 0, 0, 0.08);
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      0 2px 6px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   /* Hover state - Light mode */
   .social-icon-adaptive:hover {
-    /* Gentle scale - Apple's signature subtle lift */
-    transform: scale(1.08) translateY(-2px);
-    border-color: rgba(0, 0, 0, 0.12);
+    /* Gentle lift - Matches contact button */
+    transform: translateY(-1px);
+    border-color: rgba(0, 0, 0, 0.18);
 
     /* Apple-style soft shadow for depth */
     box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.10),
-      0 2px 4px rgba(0, 0, 0, 0.06),
-      0 8px 20px rgba(0, 0, 0, 0.06);
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 6px 12px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   /* Hover state - Dark mode */
   .dark .social-icon-adaptive:hover {
-    /* Gentle scale - Apple's signature subtle lift */
-    transform: scale(1.08) translateY(-2px);
+    /* Gentle lift - Matches contact button */
+    transform: translateY(-1px);
     border-color: rgba(255, 255, 255, 0.18);
 
     /* Apple-style soft shadow for depth */
     box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.25),
-      0 2px 4px rgba(0, 0, 0, 0.15),
-      0 8px 20px rgba(0, 0, 0, 0.15);
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 6px 12px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   /* Active/Pressed state - Light mode */
   .social-icon-adaptive:active {
-    transform: scale(0.96);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    transform: translateY(0) scale(0.98);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
     transition-duration: 0.1s;
   }
 
   /* Active/Pressed state - Dark mode */
   .dark .social-icon-adaptive:active {
-    transform: scale(0.96);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(0) scale(0.98);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
     transition-duration: 0.1s;
   }
 
@@ -1225,15 +1184,15 @@
   /* Icon Hover - Light mode: grow and darken */
   .social-icon-adaptive:hover .social-icon-color {
     color: rgba(0, 0, 0, 0.85);
-    /* Apple-style subtle icon growth */
-    transform: scale(1.12);
+    /* No scale on icon inside */
+    transform: scale(1);
   }
 
   /* Icon Hover - Dark mode: grow and brighten */
   .dark .social-icon-adaptive:hover .social-icon-color {
     color: rgba(255, 255, 255, 0.95);
-    /* Apple-style subtle icon growth */
-    transform: scale(1.12);
+    /* No scale on icon inside */
+    transform: scale(1);
   }
 
   /* ============================================
@@ -1288,43 +1247,46 @@
     transform-origin: right center;
   }
 
-  /* ---- CONTACT BUTTON (Say Hello) - Filled Style ---- */
-  .contact-button {
+  /* ---- PRIMARY ACTION BUTTONS (Say Hello & My Journey) - Filled Style ---- */
+  .contact-button,
+  .resume-button {
     /* Light mode - elegant filled button with Apple-style shadow */
     background: rgba(0, 0, 0, 0.08) !important;
     border: 1px solid rgba(0, 0, 0, 0.12) !important;
     color: hsl(0, 0%, 15%) !important;
     box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.08),
-      0 4px 8px rgba(0, 0, 0, 0.06),
-      0 8px 16px rgba(0, 0, 0, 0.04),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      0 4px 16px rgba(0, 0, 0, 0.1),
+      0 2px 6px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
 
-  .contact-button::before {
+  .contact-button::before,
+  .resume-button::before {
     /* Light mode hover sweep color */
     background: rgba(0, 0, 0, 0.08);
   }
 
-  .dark .contact-button {
+  .dark .contact-button,
+  .dark .resume-button {
     /* Dark mode - elegant filled button with Apple-style shadow */
     background: rgba(255, 255, 255, 0.08) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     color: hsl(0, 0%, 95%) !important;
     box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.08),
-      0 4px 8px rgba(0, 0, 0, 0.06),
-      0 8px 16px rgba(0, 0, 0, 0.04),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      0 2px 6px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
-  .dark .contact-button::before {
+  .dark .contact-button::before,
+  .dark .resume-button::before {
     /* Dark mode hover sweep color */
     background: rgba(255, 255, 255, 0.08);
   }
 
-  /* Contact button hover - light mode */
-  .contact-button:hover {
+  /* Button hover - light mode */
+  .contact-button:hover,
+  .resume-button:hover {
     border-color: rgba(0, 0, 0, 0.18) !important;
     transform: translateY(-1px);
     box-shadow:
@@ -1334,8 +1296,9 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
-  /* Contact button hover - dark mode */
-  .dark .contact-button:hover {
+  /* Button hover - dark mode */
+  .dark .contact-button:hover,
+  .dark .resume-button:hover {
     border-color: rgba(255, 255, 255, 0.18) !important;
     transform: translateY(-1px);
     box-shadow:
@@ -1345,87 +1308,24 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
-  /* Contact button active/pressed - light mode */
-  .contact-button:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.08),
-      0 2px 4px rgba(0, 0, 0, 0.04),
-      inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  }
-
-  /* Contact button active/pressed - dark mode */
-  .dark .contact-button:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.08),
-      0 2px 4px rgba(0, 0, 0, 0.04),
-      inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  }
-
-  /* ---- RESUME BUTTON (My Journey) - Outlined Style ---- */
-  .resume-button {
-    /* Light mode - clean outlined button with subtle Apple-style shadow */
-    background: transparent !important;
-    border: 1.5px solid rgba(0, 0, 0, 0.2) !important;
-    color: hsl(0, 0%, 15%) !important;
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.04),
-      0 2px 4px rgba(0, 0, 0, 0.02);
-  }
-
-  .resume-button::before {
-    /* Light mode hover sweep color */
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  .dark .resume-button {
-    /* Dark mode - clean outlined button with subtle Apple-style shadow */
-    background: transparent !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
-    color: hsl(0, 0%, 95%) !important;
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.15),
-      0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .dark .resume-button::before {
-    /* Dark mode hover sweep color */
-    background: rgba(255, 255, 255, 0.06);
-  }
-
-  /* Resume button hover - light mode */
-  .resume-button:hover {
-    border-color: rgba(0, 0, 0, 0.35) !important;
-    transform: translateY(-1px);
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.06),
-      0 4px 8px rgba(0, 0, 0, 0.04),
-      0 8px 16px rgba(0, 0, 0, 0.02);
-  }
-
-  /* Resume button hover - dark mode */
-  .dark .resume-button:hover {
-    border-color: rgba(255, 255, 255, 0.4) !important;
-    transform: translateY(-1px);
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.2),
-      0 4px 8px rgba(0, 0, 0, 0.15),
-      0 8px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Resume button active/pressed - light mode */
+  /* Button active/pressed - light mode */
+  .contact-button:active,
   .resume-button:active {
     transform: translateY(0) scale(0.98);
     box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.04);
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
   }
 
-  /* Resume button active/pressed - dark mode */
+  /* Button active/pressed - dark mode */
+  .dark .contact-button:active,
   .dark .resume-button:active {
     transform: translateY(0) scale(0.98);
     box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.2);
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
   }
 
 
@@ -2218,13 +2118,7 @@
   transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.social-icon-adaptive:hover {
-  transform: translateY(-2px);
-}
 
-.social-icon-adaptive:active {
-  transform: scale(0.95);
-}
 
 /* Ensure icons scale but stay centered */
 .social-icon-color {

@@ -57,12 +57,6 @@ export function SocialIcons({ className = "" }: SocialIconsProps) {
           className={`p-[clamp(0.75rem,1.5vw,1rem)] rounded-full group relative social-icon-adaptive will-change-transform`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          whileHover={{
-            scale: 1.1,
-            backgroundColor: "rgba(0,0,0,0.05)",
-            transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }
-          }}
-          whileTap={{ scale: 0.95 }}
           transition={{ duration: 0.5, delay: 0.8 + index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <Icon className="w-[clamp(1.25rem,2vw,1.5rem)] h-[clamp(1.25rem,2vw,1.5rem)] social-icon-color" />
