@@ -1,4 +1,4 @@
-import { Moon, Sun, Zap } from "lucide-react";
+import { Moon, Sun, Mail } from "lucide-react";
 import { useTheme } from "./theme-provider";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -51,7 +51,7 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                   transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                   style={{ display: "inline-flex" }}
                 >
-                  <Zap className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
+                  <Mail className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
                 </motion.div>
                 <span className="xs:hidden sm:hidden md:inline lg:hidden xl:inline">Join Newsletter</span>
                 <span className="xs:inline sm:inline md:hidden lg:inline xl:hidden">Newsletter</span>

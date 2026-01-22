@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, FileDown, Mail, MapPin, Star } from "lucide-react";
+import { Send, FileDown, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Typewriter } from "@/components/typewriter";
 import { Avatar3D } from "@/components/avatar-3d";
@@ -92,32 +92,10 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
               contain: 'layout style'
             }}
           >
-            {/* Desktop Welcome Text */}
-            <motion.div
-              className="flex items-center justify-start space-x-3 will-change-transform"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <Star className="w-[clamp(1rem,2.5vw,1.25rem)] h-[clamp(1rem,2.5vw,1.25rem)] text-foreground opacity-60" />
-              </motion.div>
-              <p className="responsive-welcome text-muted-foreground">
-                Welcome to my space
-              </p>
-              <motion.div
-                animate={{ rotate: [360, 0] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <Star className="w-[clamp(1rem,2.5vw,1.25rem)] h-[clamp(1rem,2.5vw,1.25rem)] text-foreground opacity-60" />
-              </motion.div>
-            </motion.div>
+
 
             {/* Name and Animated Roles */}
-            <div className="home-section-spacing">
+            <div className="home-section-spacing bio-full-width">
               <motion.h1
                 id="hero-heading"
                 className="responsive-name font-bold name-single-line will-change-transform"
@@ -154,9 +132,8 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
 
 
 
-            {/* Action Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-[clamp(0.75rem,2vw,1.25rem)] will-change-transform"
+              className="flex flex-col sm:flex-row gap-[clamp(0.75rem,2vw,1.25rem)] will-change-transform bio-full-width"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
@@ -168,7 +145,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
                 className="contact-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium"
               >
                 <Send className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
-                <span>Say Hello</span>
+                <span>Contact Me</span>
               </Button>
 
               <Button
@@ -176,7 +153,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
                 className="resume-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium"
               >
                 <FileDown className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
-                <span>My Journey</span>
+                <span>Resume</span>
               </Button>
             </motion.div>
 
@@ -214,29 +191,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {/* Mobile Welcome Text */}
-            <motion.div
-              className="flex items-center justify-center space-x-[clamp(0.5rem,2vw,0.75rem)]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <Star className="w-[clamp(0.875rem,2vw,1rem)] h-[clamp(0.875rem,2vw,1rem)] text-foreground opacity-60" />
-              </motion.div>
-              <p className="responsive-welcome text-muted-foreground">
-                Welcome to my space
-              </p>
-              <motion.div
-                animate={{ rotate: [360, 0] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <Star className="w-[clamp(0.875rem,2vw,1rem)] h-[clamp(0.875rem,2vw,1rem)] text-foreground opacity-60" />
-              </motion.div>
-            </motion.div>
+
 
             <div className="home-section-spacing text-center lg:text-left">
               <h1 className="responsive-name font-bold name-single-line">
@@ -253,9 +208,8 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
 
 
 
-            {/* Action Buttons */}
             <motion.div
-              className="flex flex-col gap-[clamp(0.75rem,2vw,1.25rem)]"
+              className="flex flex-col gap-[clamp(0.75rem,2vw,1.25rem)] bio-full-width max-w-lg mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -265,7 +219,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
                 className="contact-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium"
               >
                 <Send className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
-                <span>Say Hello</span>
+                <span>Contact Me</span>
               </Button>
 
               <Button
@@ -273,7 +227,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
                 className="resume-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium"
               >
                 <FileDown className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
-                <span>My Journey</span>
+                <span>Resume</span>
               </Button>
             </motion.div>
 

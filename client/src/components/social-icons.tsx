@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail, MapPin } from "lucide-react";
+import { Github, Linkedin, Youtube, Twitter, Mail, MapPin } from "lucide-react";
 import { useAnalytics } from "@/hooks/use-analytics";
 
 interface SocialIconsProps {
@@ -19,6 +19,11 @@ export function SocialIcons({ className = "" }: SocialIconsProps) {
       icon: Linkedin,
       href: "https://www.linkedin.com/in/muhammadhasib/",
       label: "LinkedIn",
+    },
+    {
+      icon: Youtube,
+      href: "https://www.youtube.com/@madebyhasib",
+      label: "YouTube",
     },
     {
       icon: Twitter,
