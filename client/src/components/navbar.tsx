@@ -24,7 +24,7 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
         <div className="w-full flex justify-between items-center h-full">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold text-foreground"
+            className="text-[clamp(1.25rem,3vw,1.5rem)] font-bold text-foreground"
           >
             MH
           </motion.div>
@@ -53,8 +53,7 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                 >
                   <Mail className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
                 </motion.div>
-                <span className="xs:hidden sm:hidden md:inline lg:hidden xl:inline">Join Newsletter</span>
-                <span className="xs:inline sm:inline md:hidden lg:inline xl:hidden">Newsletter</span>
+                <span>Newsletter</span>
               </Button>
             </motion.div>
 

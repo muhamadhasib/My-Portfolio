@@ -76,7 +76,7 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50"
+          className="fixed inset-0 z-50 overflow-y-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -85,7 +85,7 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
         >
           {/* Apple Design Language Backdrop - Subtle blur with opacity */}
           <motion.div
-            className="absolute inset-0 backdrop-blur-md will-change-transform"
+            className="fixed inset-0 backdrop-blur-md will-change-transform"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -96,17 +96,28 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
           </motion.div>
 
           {/* Centered Modal Container */}
-          <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+          <div className="flex min-h-full items-center justify-center p-4 text-center">
             <motion.div
-              className="relative w-full max-w-md pointer-events-auto will-change-transform"
-              initial={{ scale: 0.95, opacity: 0, y: 10 }}
+              className="relative w-full max-w-md pointer-events-auto will-change-transform text-left my-8"
+              initial={{ scale: 0.85, opacity: 0, y: 40 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 10 }}
+              exit={{
+                scale: 0.85,
+                opacity: 0,
+                y: 40,
+                transition: {
+                  type: "spring",
+                  stiffness: 220,
+                  damping: 28,
+                  mass: 1
+                }
+              }}
               transition={{
                 type: "spring",
-                stiffness: 350,
-                damping: 25,
-                mass: 0.5
+                stiffness: 160,
+                damping: 19,
+                mass: 1.2,
+                restDelta: 0.001
               }}
               onClick={(e) => e.stopPropagation()}
             >
@@ -125,33 +136,33 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
                 }}
               >
                 {/* Content Container */}
-                <div className="relative p-10">
+                <div className="relative p-6 md:p-10">
                   <Button
                     onClick={onClose}
                     variant="ghost"
                     size="sm"
-                    className="absolute top-5 right-5 p-2 h-9 w-9 rounded-full modal-close-button"
+                    className="absolute top-3 right-3 md:top-5 md:right-5 p-2 h-9 w-9 rounded-full border border-foreground/10 bg-transparent hover:bg-transparent hover:border-foreground/30 text-muted-foreground hover:text-foreground transition-all duration-200"
                     aria-label="Close modal"
                   >
                     <X className="w-4 h-4" />
                   </Button>
 
-                  <div className="text-center mb-10">
-                    <h2 className="text-[32px] font-semibold text-foreground mb-3 tracking-[-0.02em]">
+                  <div className="text-center mb-6 md:mb-10">
+                    <h2 className="text-2xl md:text-[32px] font-semibold text-foreground mb-2 md:mb-3 tracking-[-0.02em]">
                       Newsletter
                     </h2>
-                    <p className="text-muted-foreground text-[15px] leading-[1.47] max-w-sm mx-auto">
+                    <p className="text-muted-foreground text-sm md:text-[15px] leading-[1.47] max-w-sm mx-auto">
                       Get updates on AI insights, projects, and breakthrough discoveries
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 md:space-y-7">
                     <div>
                       <Input
                         id="newsletter-email"
                         type="email"
                         {...register("email")}
-                        className="h-[52px] rounded-full border-border bg-background px-5 text-[15px] focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary/50 transition-all duration-200"
+                        className="h-[48px] md:h-[52px] rounded-full border-border bg-background px-5 text-[15px] focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary/50 transition-all duration-200"
                         placeholder="Your email"
                       />
                       {errors.email && (
@@ -162,7 +173,7 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
                     <Button
                       type="submit"
                       disabled={newsletterMutation.isPending}
-                      className="w-full h-[52px] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-[15px] transition-all duration-200 shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] active:scale-[0.98]"
+                      className="w-full h-[48px] md:h-[52px] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-[15px] transition-all duration-200 shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] active:scale-[0.98]"
                     >
                       {newsletterMutation.isPending ? (
                         <div className="flex items-center justify-center space-x-2.5">

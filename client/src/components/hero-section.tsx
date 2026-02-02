@@ -38,7 +38,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
     document.body.removeChild(link);
   };
 
-  const bioText = `I'm a Computer Science & Engineering student and passionate AI & ML Engineer. I architect intelligent systems with Python and JavaScript, solve complex algorithmic challenges on LeetCode, and push the boundaries of human-machine creativity.`;
+  const bioText = `I'm a Computer Science & Engineering student and passionate AI & ML Engineer. I architect intelligent systems with Python and JavaScript, solved 500+ LeetCode problems, and push the boundaries of human-machine creativity.`;
 
   return (
     <article className="content-section overflow-visible" role="article" aria-labelledby="hero-heading">
@@ -209,14 +209,14 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
 
 
             <motion.div
-              className="flex flex-col gap-[clamp(0.75rem,2vw,1.25rem)] bio-full-width max-w-lg mx-auto lg:mx-0"
+              className="flex flex-col gap-[clamp(0.75rem,2vw,1.25rem)] bio-full-width max-w-lg mx-auto lg:mx-0 w-full px-4 sm:px-0"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <Button
                 onClick={onContactClick}
-                className="contact-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium"
+                className="contact-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium w-full sm:w-auto"
               >
                 <Send className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
                 <span>Contact Me</span>
@@ -224,7 +224,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
 
               <Button
                 onClick={handleResumeDownload}
-                className="resume-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium"
+                className="resume-button responsive-button flex items-center justify-center space-x-[clamp(0.5rem,1vw,0.75rem)] font-medium w-full sm:w-auto"
               >
                 <FileDown className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
                 <span>Resume</span>
