@@ -68,7 +68,7 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                 onMouseLeave={() => setThemeRotation(-180)}
                 variant="ghost"
                 size="sm"
-                className="apple-theme-toggle relative w-[clamp(2.25rem,3.5vw,2.75rem)] h-[clamp(2.25rem,3.5vw,2.75rem)] rounded-full flex items-center justify-center overflow-hidden"
+                className="apple-theme-toggle relative rounded-full flex items-center justify-center overflow-hidden"
               >
                 <motion.div
                   className="relative z-10 flex items-center justify-center"

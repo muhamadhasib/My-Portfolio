@@ -158,7 +158,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
             </motion.div>
 
             {/* Social Icons */}
-            <SocialIcons />
+            <SocialIcons className="bio-full-width" />
           </motion.div>
 
           {/* Right Side: 3D Avatar */}
@@ -209,7 +209,7 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
 
 
             <motion.div
-              className="flex flex-col gap-[clamp(0.75rem,2vw,1.25rem)] bio-full-width max-w-lg mx-auto lg:mx-0 w-full px-4 sm:px-0"
+              className="flex flex-col gap-[clamp(0.75rem,2vw,1.25rem)] bio-full-width max-w-lg mx-auto lg:mx-0 w-full"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -231,8 +231,8 @@ export function HeroSection({ onContactClick }: HeroSectionProps) {
               </Button>
             </motion.div>
 
-            <div className="flex justify-center">
-              <SocialIcons />
+            <div className="flex justify-center w-full max-w-lg mx-auto lg:mx-0">
+              <SocialIcons className="bio-full-width" />
             </div>
           </motion.div>
         </div>

@@ -51,7 +51,7 @@ export function SocialIcons({ className = "" }: SocialIconsProps) {
   };
 
   return (
-    <div className={`flex space-x-[clamp(1rem,2vw,1.5rem)] ${className} overflow-visible`}>
+    <div className={`flex justify-between items-center w-full ${className} overflow-visible`}>
       {socialLinks.map(({ icon: Icon, href, label }, index) => (
         <motion.a
           key={label}
