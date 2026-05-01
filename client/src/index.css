@@ -41,8 +41,8 @@
   --home-section-spacing: clamp(0.875rem, 2vw, 1.5rem);
 
   /* Shared Button & Social Icon Colors - Light Theme */
-  --btn-bg: rgba(0, 0, 0, 0.05);
-  --btn-border: rgba(0, 0, 0, 0.1);
+  --btn-bg: rgba(255, 255, 255, 0.35);
+  --btn-border: rgba(255, 255, 255, 0.5);
   --btn-text: hsla(0, 0%, 9%, 0.85);
   --btn-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   --btn-hover-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 6px 12px rgba(0, 0, 0, 0.1), 0 12px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.6);
@@ -1023,10 +1023,12 @@
 
   /* Base Social Icon - Clean Minimalist Foundation */
   .social-icon-adaptive {
-    /* Light mode - Match Buttons Exact Background & Border */
+    /* Light mode - frosted glass */
     background: var(--btn-bg);
     border: 1px solid var(--btn-border);
     border-radius: 50%;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
 
     /* Required for pseudo-element positioning */
     position: relative;
@@ -1217,6 +1219,8 @@
     border: 1px solid var(--btn-border) !important;
     color: var(--btn-text) !important;
     box-shadow: var(--btn-shadow);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     /* NEW: Ensure identical widths and fill container */
     flex: 1;
     width: 100%;
