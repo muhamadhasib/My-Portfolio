@@ -5,6 +5,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =============================================
+   CSS CUSTOM PROPERTIES
+   ============================================= */
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(0, 0%, 9%);
@@ -27,28 +30,38 @@
   --ring: hsl(0, 0%, 9%);
   --radius: 0.5rem;
 
-  /* Apple-style Animation Variables */
+  /* Apple-style animation easing */
   --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --duration-fast: 200ms;
   --duration-medium: 400ms;
   --duration-slow: 600ms;
 
-  /* Apple-style gray for name text - matches role text color */
+  /* Name text color */
   --name-text-color: hsla(0, 0%, 9%, 0.8);
 
   /* Consistent spacing for home section text elements */
   --home-section-spacing: clamp(0.875rem, 2vw, 1.5rem);
 
-  /* Shared Button & Social Icon Colors - Light Theme */
+  /* Shared Button & Social Icon Colors — Light Theme */
   --btn-bg: rgba(255, 255, 255, 0.35);
   --btn-border: rgba(255, 255, 255, 0.5);
   --btn-text: hsla(0, 0%, 9%, 0.85);
-  --btn-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  --btn-hover-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 6px 12px rgba(0, 0, 0, 0.1), 0 12px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  --btn-active-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  --btn-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --btn-hover-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    0 6px 12px rgba(0, 0, 0, 0.1),
+    0 12px 24px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --btn-active-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
 
-  /* Glassomorphism variables for light mode */
+  /* Glassomorphism — Light */
   --glass-bg: rgba(255, 255, 255, 0.15);
   --glass-border: rgba(255, 255, 255, 0.25);
   --glass-shadow-outer: rgba(0, 0, 0, 0.12);
@@ -81,18 +94,27 @@
   --destructive-foreground: hsl(0, 0%, 98%);
   --ring: hsl(0, 0%, 98%);
 
-  /* Apple-style gray for name text - matches role text color */
   --name-text-color: hsla(0, 0%, 98%, 0.8);
 
-  /* Shared Button & Social Icon Colors - Dark Theme */
+  /* Shared Button & Social Icon Colors — Dark Theme */
   --btn-bg: rgba(255, 255, 255, 0.08);
   --btn-border: rgba(255, 255, 255, 0.12);
   --btn-text: hsl(0, 0%, 95%);
-  --btn-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  --btn-hover-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.08), 0 12px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  --btn-active-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --btn-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --btn-hover-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  --btn-active-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
-  /* Glassomorphism variables for dark mode */
+  /* Glassomorphism — Dark */
   --glass-bg: rgba(0, 0, 0, 0.25);
   --glass-border: rgba(255, 255, 255, 0.15);
   --glass-shadow-outer: rgba(0, 0, 0, 0.4);
@@ -101,6 +123,9 @@
   --glass-content-bg: rgba(0, 0, 0, 0.85);
 }
 
+/* =============================================
+   BASE LAYER
+   ============================================= */
 @layer base {
   * {
     @apply border-border;
@@ -120,7 +145,6 @@
   body {
     @apply font-serif antialiased text-foreground;
     font-family: 'Source Serif Pro', Georgia, serif !important;
-    /* Unified background for entire website */
     background:
       radial-gradient(circle at 20% 50%, hsla(270, 85%, 60%, 0.15) 0%, transparent 50%),
       radial-gradient(circle at 80% 20%, hsla(188, 95%, 44%, 0.15) 0%, transparent 50%),
@@ -136,79 +160,71 @@
     position: relative;
   }
 
-  /* Anthropic Sans-style font for headings */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
     font-weight: 600;
     letter-spacing: -0.02em;
   }
 
-  /* Anthropic Serif-style font for body text */
   p {
     font-family: 'Source Serif Pro', Georgia, serif !important;
   }
 
-  /* Anthropic Sans-style font for UI elements */
-  button,
-  input,
-  textarea,
-  select,
-  label,
-  nav,
-  .nav-link {
+  button, input, textarea, select, label, nav, .nav-link {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   }
 
-  /* Spans and divs inherit from parent */
-  span,
-  div,
-  a,
-  li,
-  td,
-  th {
+  span, div, a, li, td, th {
     font-family: inherit;
   }
 }
 
+/* =============================================
+   UTILITIES — MOBILE-FIRST (320px base)
+   Breakpoints: sm 480px · md 768px · lg 1024px · xl 1280px · 2xl 1536px
+   Media queries: min-width ONLY
+   Sizing: rem · clamp() · % · fr · minmax()
+   ============================================= */
 @layer utilities {
 
-  /* Hardware acceleration for smoother animations */
+  /* ---- Hardware Acceleration ---- */
   .will-change-transform {
     will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
   }
 
-
-  /* Container with max-width constraint - strictly enforce 1400px */
+  /* ---- Containers ---- */
   .max-container {
-    max-width: 1400px !important;
-    margin: 0 auto;
     width: 100%;
+    margin: 0 auto;
     position: relative;
     box-sizing: border-box;
   }
 
-  /* Ensure all content respects the width limit */
-  .content-width-limit {
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
+  @media (min-width: 1280px) {
+    .max-container {
+      max-width: 87.5rem;
+    }
   }
 
-  /* Glassmorphism Navbar Styling - Consistent across themes */
-  .navbar-glass {
-    width: calc(100% - clamp(1rem, 4vw, 3rem));
-    max-width: 1400px;
+  .content-width-limit {
+    width: 100%;
     margin: 0 auto;
-    height: clamp(45px, 6vh, 70px);
-    padding: 0 clamp(0.75rem, 1.5vw, 1.5rem);
-    /* Light mode glassomorphism */
+  }
+
+  @media (min-width: 1280px) {
+    .content-width-limit {
+      max-width: 87.5rem;
+    }
+  }
+
+  /* ---- Glassmorphism Navbar ---- */
+  .navbar-glass {
+    /* Base: 320px+ */
+    width: calc(100% - 1.5rem);
+    height: clamp(3rem, 6vh, 4rem);
+    padding: 0 clamp(0.75rem, 2vw, 1.25rem);
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -221,10 +237,24 @@
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .navbar-glass {
+      width: calc(100% - clamp(1rem, 4vw, 3rem));
+      height: clamp(2.8125rem, 6vh, 4.375rem);
+      padding: 0 clamp(0.75rem, 1.5vw, 1.5rem);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .navbar-glass {
+      max-width: 87.5rem;
+    }
   }
 
   .dark .navbar-glass {
-    /* Dark mode glassomorphism */
     background: rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -235,24 +265,23 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 
-  /* Responsive width adjustments */
-  @media (max-width: 768px) {
-    .navbar-glass {
-      width: calc(100% - clamp(1rem, 4vw, 1.5rem));
-      height: clamp(48px, 6vh, 64px);
-      padding: 0 clamp(0.75rem, 2vw, 1.25rem);
-    }
-
-    .navbar-section {
-      padding-top: clamp(0.75rem, 2vh, 1rem);
-      padding-bottom: clamp(0.75rem, 2vh, 1rem);
-    }
+  /* ---- Navbar Section ---- */
+  .navbar-section {
+    background: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding-top: clamp(0.75rem, 1.5vh, 1.25rem);
+    padding-bottom: clamp(0.5rem, 1vh, 0.75rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-
-  /* Universal glass-card class - Consistent glassomorphism */
+  /* ---- Universal Glass Card ---- */
   .glass-card {
-    /* Light mode glassomorphism */
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -265,7 +294,6 @@
   }
 
   .dark .glass-card {
-    /* Dark mode glassomorphism */
     background: rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -276,12 +304,7 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 
-  /* Navbar section container */
-  .navbar-section {
-    background: transparent;
-  }
-
-  /* Single line text for Muhammad Hasib - always show full name */
+  /* ---- Typography ---- */
   .name-single-line {
     white-space: nowrap;
     overflow: visible;
@@ -290,9 +313,9 @@
     min-width: fit-content;
   }
 
-  /* Revolutionary Fluid Typography System for All Devices */
+  /* Fluid type — clamp handles all sizes without breakpoints */
   .responsive-name {
-    font-size: clamp(1.25rem, 3vw + 0.4rem, 3.5rem);
+    font-size: clamp(1.5rem, 4vw + 0.5rem, 3.5rem);
     line-height: clamp(1.05, 0.8vw + 0.95, 1.15);
     font-weight: 700;
     letter-spacing: clamp(-0.03em, -0.01vw, -0.02em);
@@ -302,224 +325,211 @@
   }
 
   .responsive-role {
-    font-size: clamp(0.75rem, 2.2vw + 0.2rem, 1.75rem);
+    font-size: clamp(0.875rem, 2.2vw + 0.2rem, 1.75rem);
     line-height: clamp(1.15, 0.4vw + 1.05, 1.3);
     height: auto;
     min-height: clamp(1.2rem, 2.5vw + 0.5rem, 2.5rem);
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
     font-weight: 500;
     word-break: keep-all;
   }
 
+  @media (min-width: 1024px) {
+    .responsive-role {
+      justify-content: flex-start;
+    }
+  }
+
+  /* ---- Bio Text ---- */
   .responsive-bio {
-    font-size: clamp(0.85rem, 1.8vw + 0.2rem, 1.35rem);
+    font-size: clamp(0.8rem, 1.8vw + 0.2rem, 1.35rem);
     line-height: clamp(1.4, 0.35vw + 1.3, 1.75);
     font-weight: 400;
     letter-spacing: clamp(0.01em, 0.003vw, 0.02em);
     word-break: normal;
     overflow-wrap: normal;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: none;
+    -webkit-hyphens: none;
+    word-spacing: clamp(0.05em, 0.02vw, 0.15em);
   }
 
+  @media (min-width: 1024px) {
+    .responsive-bio {
+      font-size: clamp(0.9rem, 0.65vw, 1.2rem);
+      line-height: 1.65;
+    }
+  }
 
+  @media (min-width: 1536px) {
+    .responsive-bio {
+      font-size: clamp(1.1rem, 0.8vw, 1.4rem);
+      line-height: 1.8;
+    }
+  }
 
-  /* Consistent spacing for home section text elements */
+  /* ---- Home Section Spacing ---- */
   .home-section-spacing {
     display: flex;
     flex-direction: column;
   }
 
-  .home-section-spacing>*+* {
+  .home-section-spacing > * + * {
     margin-top: var(--home-section-spacing) !important;
   }
 
-  /* Mobile-First Avatar Sizing System */
+  /* ---- Avatar Sizing ---- */
   .avatar-mobile-size {
-    width: clamp(200px, 50vw, 280px);
-    height: clamp(200px, 50vw, 280px);
+    width: clamp(12.5rem, 50vw, 17.5rem);
+    height: clamp(12.5rem, 50vw, 17.5rem);
+  }
+
+  @media (min-width: 768px) {
+    .avatar-mobile-size {
+      width: clamp(15rem, 45vw, 20rem);
+      height: clamp(15rem, 45vw, 20rem);
+    }
   }
 
   .avatar-desktop-size {
-    width: clamp(280px, 22vw, 384px);
-    height: clamp(280px, 22vw, 384px);
+    width: clamp(17.5rem, 22vw, 24rem);
+    height: clamp(17.5rem, 22vw, 24rem);
   }
 
-  /* Mobile Layout System */
+  /* ---- Layout System (Mobile-First) ---- */
+
+  /* Desktop hidden by default */
   .desktop-layout,
   .desktop-grid {
     display: none;
   }
 
+  /* Mobile layout: visible by default */
   .mobile-layout {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding: 1rem 0;
+    width: 100%;
+    padding: 0 clamp(0.5rem, 2vw, 1rem);
+    gap: clamp(0.625rem, 1.5vw, 0.875rem);
+    overflow: visible;
   }
 
   .avatar-container {
     margin-bottom: 1.5rem;
   }
 
-  /* Tablet Portrait (768px+) - Enhanced Mobile Layout */
+  /* sm (480px+): more breathing room */
+  @media (min-width: 480px) {
+    .mobile-layout {
+      padding: 0 clamp(0.875rem, 2.5vw, 1.25rem);
+      gap: clamp(0.875rem, 2.5vw, 1.25rem);
+    }
+    .avatar-container {
+      margin-bottom: 1.75rem;
+    }
+  }
+
+  /* md (768px+): tablet portrait — centered column, max-width container */
   @media (min-width: 768px) {
     .mobile-layout {
-      padding: 1.5rem 0;
+      max-width: 43.75rem;
+      padding: 0 clamp(1.5rem, 4vw, 3rem);
+      gap: clamp(1.25rem, 3vw, 2rem);
     }
-
     .avatar-container {
       margin-bottom: 2rem;
     }
-
-    .avatar-mobile-size {
-      width: clamp(240px, 45vw, 320px);
-      height: clamp(240px, 45vw, 320px);
-    }
   }
 
-  /* Desktop Layout Activation (853px+) */
-  @media (min-width: 853px) {
-    .desktop-layout {
-      display: block;
-    }
-
-    .desktop-grid {
-      display: grid;
-    }
-
+  /* lg (1024px+): switch to desktop side-by-side grid */
+  @media (min-width: 1024px) {
     .mobile-layout {
       display: none;
     }
-  }
-
-  /* Foldable Device Optimizations */
-  @media (min-width: 853px) and (max-width: 1280px) {
-    .foldable-container {
-      max-width: 95%;
-      padding: 1rem;
-      margin: 0 auto;
+    .desktop-layout {
+      display: block;
     }
-
-    .foldable-spacing {
-      gap: 1rem;
-    }
-
-    .foldable-text-scaling {
-      font-size: clamp(0.8rem, 1.2vw, 1.1rem);
-      line-height: 1.4;
-    }
-  }
-
-  /* Critical Asus Zenbook Fold Fix (853x1280) */
-  @media (width: 853px) {
-    .responsive-name {
-      font-size: clamp(1.8rem, 3vw, 2.5rem) !important;
-      line-height: 1.1 !important;
-    }
-
-    .responsive-role {
-      font-size: clamp(0.9rem, 1.8vw, 1.2rem) !important;
-      min-height: 1.8rem !important;
-    }
-
-    .responsive-bio {
-      font-size: clamp(0.75rem, 1.4vw, 0.95rem) !important;
-      line-height: 1.45 !important;
-    }
-
-    /* Grid layout adjustments for Zenbook Fold */
     .desktop-grid {
-      gap: 1.5rem !important;
-      padding: 1rem 0 !important;
-      grid-template-columns: 1fr 250px !important;
-    }
-
-    /* Content section adjustments */
-    .content-section {
-      padding: 0.5rem 0 !important;
-    }
-
-    /* Button spacing fixes */
-    .space-y-6> :not([hidden])~ :not([hidden]) {
-      margin-top: 1rem !important;
-    }
-
-    /* Avatar size adjustment for Zenbook Fold */
-    .w-80 {
-      width: 16rem !important;
-    }
-
-    .h-80 {
-      height: 16rem !important;
-    }
-
-    .w-96 {
-      width: 20rem !important;
-    }
-
-    .h-96 {
-      height: 20rem !important;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 3vw, 3rem);
+      align-items: center;
+      width: 100%;
+      max-width: 75rem;
+      padding: 0 clamp(1rem, 2.5vw, 2rem);
     }
   }
 
-  /* Responsive button sizing */
+  /* xl (1280px+): wider proportions */
+  @media (min-width: 1280px) {
+    .desktop-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(2.5rem, 4vw, 4rem);
+      max-width: 87.5rem;
+      padding: 0 clamp(1.5rem, 3vw, 3rem);
+    }
+  }
+
+  /* 2xl (1536px+): ultra-wide */
+  @media (min-width: 1536px) {
+    .desktop-grid {
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: clamp(4rem, 6vw, 8rem);
+      max-width: 137.5rem;
+      padding: 0 clamp(3rem, 5vw, 6rem);
+    }
+    .responsive-role {
+      justify-content: flex-start;
+    }
+  }
+
+  /* Foldable container helper (used between md and lg) */
+  .foldable-container {
+    width: 100%;
+  }
+
+  .foldable-spacing {
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .foldable-text-scaling {
+    font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+    line-height: 1.4;
+  }
+
+  /* ---- Responsive Buttons ---- */
   .responsive-button {
-    padding: clamp(0.75rem, 1.5vw + 0.25rem, 1.25rem) clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
+    /* Base (320px+): full-width stacked on mobile */
+    padding: 0.55rem 1.25rem;
     font-size: clamp(0.825rem, 1.2vw + 0.3rem, 1.125rem);
     border-radius: 9999px;
-    min-width: clamp(140px, 20vw, 180px);
+    width: 100%;
+    min-width: 100%;
   }
 
-  /* Extra small device optimization for buttons */
-  @media (max-width: 380px) {
+  /* sm (480px+): auto-width, pill sizing */
+  @media (min-width: 480px) {
     .responsive-button {
-      padding: 0.45rem 0.875rem !important;
-      font-size: 0.825rem !important;
-      min-width: 100% !important;
-      /* Make buttons full width on very small screens */
-      width: 100% !important;
+      padding: clamp(0.75rem, 1.5vw + 0.25rem, 1.25rem) clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
+      min-width: clamp(8.75rem, 20vw, 11.25rem);
+      width: auto;
     }
   }
 
-  /* MOBILE-SPECIFIC FIX: Reduce vertical padding for all mobile devices */
-  @media (max-width: 768px) {
-    .responsive-button {
-      padding: 0.55rem 1.25rem;
-    }
-  }
+  /* ---- Spacing Utilities ---- */
+  .responsive-spacing-xs { gap: clamp(0.25rem, 0.5vw, 0.5rem); margin: clamp(0.25rem, 0.5vw, 0.5rem); }
+  .responsive-spacing-sm { gap: clamp(0.5rem, 1vw, 1rem);   margin: clamp(0.5rem, 1vw, 1rem); }
+  .responsive-spacing-md { gap: clamp(0.75rem, 1.5vw, 1.5rem); margin: clamp(0.75rem, 1.5vw, 1.5rem); }
+  .responsive-spacing-lg { gap: clamp(1rem, 2vw, 2rem);     margin: clamp(1rem, 2vw, 2rem); }
+  .responsive-spacing-xl { gap: clamp(1.5rem, 3vw, 3rem);   margin: clamp(1.5rem, 3vw, 3rem); }
 
-  /* Universal Spacing System */
-  .responsive-spacing-xs {
-    gap: clamp(0.25rem, 0.5vw, 0.5rem);
-    margin: clamp(0.25rem, 0.5vw, 0.5rem);
-  }
-
-  .responsive-spacing-sm {
-    gap: clamp(0.5rem, 1vw, 1rem);
-    margin: clamp(0.5rem, 1vw, 1rem);
-  }
-
-  .responsive-spacing-md {
-    gap: clamp(0.75rem, 1.5vw, 1.5rem);
-    margin: clamp(0.75rem, 1.5vw, 1.5rem);
-  }
-
-  .responsive-spacing-lg {
-    gap: clamp(1rem, 2vw, 2rem);
-    margin: clamp(1rem, 2vw, 2rem);
-  }
-
-  .responsive-spacing-xl {
-    gap: clamp(1.5rem, 3vw, 3rem);
-    margin: clamp(1.5rem, 3vw, 3rem);
-  }
-
-  /* Avatar Responsive Scaling */
-  .responsive-avatar-scale {
-    transform: scale(clamp(0.4, 15vw + 0.1, 1));
-  }
-
-  /* Fixed typing animation container */
+  /* ---- Typing Animation ---- */
   .typing-container {
     min-height: 2rem;
     display: flex;
@@ -527,14 +537,121 @@
     width: 100%;
   }
 
-  /* Removed gradient-text - using neutral colors only */
+  /* ---- Bio Width ---- */
+  .bio-full-width {
+    max-width: 100%;
+    width: 100%;
+  }
 
-  /* Contact and Resume Button Styling */
+  @media (min-width: 768px) {
+    .bio-full-width {
+      max-width: 95%;
+      width: 95%;
+      padding: 0 0.75rem;
+    }
+  }
 
+  @media (min-width: 1024px) {
+    .bio-full-width {
+      max-width: 75%;
+      width: 75%;
+      padding: 0;
+    }
+  }
 
-  /* Apple Design Language Newsletter Button - Matches Navbar */
+  @media (min-width: 1536px) {
+    .bio-full-width {
+      max-width: 70%;
+      width: 70%;
+    }
+  }
+
+  /* ---- Text Justification ---- */
+  .text-justified {
+    text-align: justify;
+  }
+
+  .text-justify-mobile {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: none;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+  }
+
+  .text-justify-desktop {
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .text-justify-desktop {
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: none;
+      -webkit-hyphens: none;
+      -ms-hyphens: none;
+    }
+  }
+
+  /* ---- Animation Isolation (prevents typing animation bleed) ---- */
+  .bio-text-isolation {
+    isolation: isolate;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    position: relative;
+    z-index: 1;
+  }
+
+  .typing-container-isolated {
+    isolation: isolate;
+    transform: translateZ(0);
+    contain: layout style paint;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .typing-animation-isolated {
+    position: relative;
+    isolation: isolate;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .typing-animation-container {
+    isolation: isolate;
+    transform: translateZ(0);
+    contain: layout style paint;
+    will-change: transform;
+  }
+
+  .typing-text-isolated {
+    isolation: isolate;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    position: relative;
+  }
+
+  .text-content-isolated {
+    isolation: isolate;
+    transform: translateZ(0);
+    contain: layout style;
+  }
+
+  .text-content-isolated > * {
+    isolation: isolate;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* ============================================
+     APPLE DESIGN LANGUAGE — NEWSLETTER BUTTON
+     ============================================ */
   .apple-newsletter-button {
-    /* Light mode - exactly matches navbar glassmorphism */
     background: rgba(255, 255, 255, 0.15) !important;
     background-color: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(20px) saturate(180%) !important;
@@ -559,14 +676,11 @@
     letter-spacing: -0.01em;
   }
 
-  /* Pseudo-element for left-to-right hover sweep effect */
   .apple-newsletter-button::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     z-index: -1;
     background: rgba(0, 0, 0, 0.08);
     transform: scaleX(0);
@@ -578,20 +692,17 @@
     background: rgba(255, 255, 255, 0.08);
   }
 
-  /* Hover: sweep from left to right */
   .apple-newsletter-button:hover::before {
     transform: scaleX(1);
     transform-origin: left center;
   }
 
-  /* Exit: sweep from right to left (reverse origin on mouse leave) */
   .apple-newsletter-button:not(:hover)::before {
     transform: scaleX(0);
     transform-origin: right center;
   }
 
   .dark .apple-newsletter-button {
-    /* Dark mode - exactly matches navbar glassmorphism */
     background: rgba(0, 0, 0, 0.25) !important;
     background-color: rgba(0, 0, 0, 0.25) !important;
     backdrop-filter: blur(20px) saturate(180%) !important;
@@ -618,18 +729,18 @@
 
   .apple-newsletter-button:active {
     transform: translateY(0) scale(0.98);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
   .dark .apple-newsletter-button:active {
     transform: translateY(0) scale(0.98);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
+  /* ============================================
+     APPLE DESIGN LANGUAGE — THEME TOGGLE
+     ============================================ */
   .apple-theme-toggle {
-    /* Light mode - exactly matches navbar glassmorphism */
     background: rgba(255, 255, 255, 0.15) !important;
     background-color: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(20px) saturate(180%) !important;
@@ -647,7 +758,6 @@
   }
 
   .dark .apple-theme-toggle {
-    /* Dark mode - exactly matches navbar glassmorphism */
     background: rgba(0, 0, 0, 0.25) !important;
     background-color: rgba(0, 0, 0, 0.25) !important;
     backdrop-filter: blur(20px) saturate(180%) !important;
@@ -683,27 +793,22 @@
 
   .apple-theme-toggle:active {
     transform: translateY(0);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
   .dark .apple-theme-toggle:active {
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
-  /* Icon color adjustments for Apple design */
   .apple-theme-toggle svg {
     color: currentColor;
     transition: color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
-  .apple-theme-toggle:hover svg {
-    color: currentColor;
-  }
-
+  /* ============================================
+     CONTACT ICON 3D
+     ============================================ */
   .contact-icon-3d {
-    /* Light mode glassomorphism */
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -715,10 +820,11 @@
       0 1px 4px rgba(0, 0, 0, 0.05),
       inset 0 1px 0 rgba(255, 255, 255, 0.7);
     transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
   }
 
   .dark .contact-icon-3d {
-    /* Dark mode glassomorphism */
     background: rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -730,403 +836,102 @@
   }
 
   .contact-icon-3d:hover {
+    transform: translateY(-5px) rotateX(15deg) rotateY(15deg);
     background: rgba(0, 0, 0, 0.2);
     border-color: rgba(0, 0, 0, 0.2);
     box-shadow:
-      0 15px 35px rgba(0, 0, 0, 0.12),
-      0 5px 15px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      0 20px 40px rgba(0, 0, 0, 0.12),
+      0 10px 20px rgba(0, 0, 0, 0.06);
   }
 
   .dark .contact-icon-3d:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
     box-shadow:
-      0 15px 35px rgba(0, 0, 0, 0.4),
-      0 5px 15px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  }
-
-  .text-justified {
-    text-align: justify;
-  }
-
-  /* Universal text justification system */
-  .text-justify-mobile {
-    text-align: center;
-  }
-
-  /* Perfect justification for all mobile devices */
-  @media (max-width: 767px) {
-    .text-justify-mobile {
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: none;
-      -webkit-hyphens: none;
-      -ms-hyphens: none;
-    }
-  }
-
-  /* Enhanced justification for small screens */
-  @media (max-width: 374px) {
-    .text-justify-mobile {
-      text-align: justify;
-      text-justify: inter-character;
-      word-spacing: -0.05em;
-    }
-
-    /* iPhone SE & Small Mobile Tweaks */
-    .responsive-name {
-      font-size: clamp(1.5rem, 6vw, 2rem) !important;
-    }
-
-    .responsive-role {
-      font-size: clamp(0.9rem, 4vw, 1.1rem) !important;
-    }
-  }
-
-  /* Nest Hub & Short Screen Optimization (Landscape) */
-  @media (max-height: 600px) and (min-width: 600px) {
-    .home-section-spacing>*+* {
-      margin-top: 0.5rem !important;
-    }
-
-    .avatar-mobile-size {
-      width: clamp(140px, 20vh, 180px);
-      height: clamp(140px, 20vh, 180px);
-    }
-
-    /* Allow scrolling instead of clipping */
-    body,
-    html {
-      overflow-y: auto !important;
-      height: auto !important;
-    }
-
-    .mobile-layout {
-      padding: 0.5rem 0;
-    }
-  }
-
-  /* Foldable & Tablet Specifics */
-
-  /* iPad Mini / Surface Duo (Portrait) */
-  @media (min-width: 768px) and (max-width: 900px) {
-    .responsive-name {
-      font-size: clamp(2rem, 4vw, 3rem);
-    }
-  }
-
-  /* Galaxy Z Fold 5 (Unfolded) & Small Tablets */
-  @media (min-width: 600px) and (max-width: 852px) {
-    .mobile-layout {
-      max-width: 90%;
-      margin: 0 auto;
-    }
-
-    .avatar-container {
-      margin-bottom: 1rem;
-    }
-  }
-
-  /* Large Tablets (iPad Pro/Air) & Small Laptops */
-  @media (min-width: 900px) and (max-width: 1200px) {
-    .max-container {
-      padding: 0 2rem;
-    }
-
-    .desktop-grid {
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 2rem;
-    }
-  }
-
-
-  /* Desktop text justification - left aligned on large screens, justified on medium+ */
-  .text-justify-desktop {
-    text-align: left;
-  }
-
-  /* Shared Width Container for Hero Elements - ensures pixel-perfect alignment */
-  .bio-full-width {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  /* Bio text styling - separate from width control */
-  .responsive-bio {
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: none;
-    -webkit-hyphens: none;
-    line-height: clamp(1.4, 0.3vw + 1.3, 1.7);
-    word-spacing: clamp(0.05em, 0.02vw, 0.15em);
-  }
-
-  /* Ultra-Wide Displays (2560px+) */
-  @media (min-width: 2560px) {
-    .bio-full-width {
-      max-width: 75%;
-      width: 75%;
-    }
-
-    .responsive-bio {
-      font-size: clamp(1.1rem, 0.8vw, 1.4rem);
-      line-height: 1.8;
-    }
-  }
-
-  /* Desktop (1024px-2559px) - Consistent 80% width for all hero elements */
-  @media (min-width: 1024px) and (max-width: 2559px) {
-    .bio-full-width {
-      max-width: 75%;
-      width: 75%;
-    }
-
-    .responsive-bio {
-      font-size: clamp(0.9rem, 0.65vw, 1.2rem);
-      line-height: 1.65;
-    }
-  }
-
-  /* Foldable Portrait & Small Tablets (853px-1023px) - CRITICAL FOR ASUS ZENBOOK FOLD */
-  @media (min-width: 853px) and (max-width: 1023px) {
-    .bio-full-width {
-      max-width: 90%;
-      width: 90%;
-      font-size: clamp(0.8rem, 0.55vw, 1.1rem);
-      line-height: 1.55;
-      padding: 0 1rem;
-    }
-  }
-
-  /* Tablet Landscape (768px-852px) */
-  @media (min-width: 768px) and (max-width: 852px) {
-    .bio-full-width {
-      max-width: 95%;
-      width: 95%;
-      font-size: clamp(0.9rem, 0.6vw, 1.15rem);
-      line-height: 1.55;
-      padding: 0 0.75rem;
-    }
-  }
-
-  /* Mobile Landscape & Small Tablets (576px-767px) */
-  @media (min-width: 576px) and (max-width: 767px) {
-    .bio-full-width {
-      max-width: 100%;
-      width: 100%;
-      font-size: clamp(0.85rem, 0.55vw, 1.1rem);
-      line-height: 1.5;
-      padding: 0 0.5rem;
-    }
-  }
-
-  /* Mobile Portrait (320px-575px) */
-  @media (min-width: 320px) and (max-width: 575px) {
-    .bio-full-width {
-      max-width: 100%;
-      width: 100%;
-      font-size: clamp(0.8rem, 0.5vw, 1.05rem);
-      line-height: 1.45;
-      word-spacing: 0.08em;
-    }
-  }
-
-  /* Micro Devices (<320px) */
-  @media (max-width: 319px) {
-    .bio-full-width {
-      max-width: 100%;
-      width: 100%;
-      font-size: 0.65rem;
-      line-height: 1.35;
-      word-spacing: 0.1em;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .text-justify-desktop {
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: none;
-      -webkit-hyphens: none;
-      -ms-hyphens: none;
-    }
-  }
-
-  /* Bio text isolation to prevent typing animation interference */
-  .bio-text-isolation {
-    isolation: isolate;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Typing animation isolation */
-  .typing-container-isolated {
-    isolation: isolate;
-    transform: translateZ(0);
-    contain: layout style paint;
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
-  }
-
-  .typing-animation-isolated {
-    position: relative;
-    isolation: isolate;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-
-  .typing-animation-container {
-    isolation: isolate;
-    transform: translateZ(0);
-    contain: layout style paint;
-    will-change: transform;
-  }
-
-  .typing-text-isolated {
-    isolation: isolate;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    position: relative;
-  }
-
-  /* Text content isolation from animations */
-  .text-content-isolated {
-    isolation: isolate;
-    transform: translateZ(0);
-    contain: layout style;
-  }
-
-  .text-content-isolated>* {
-    isolation: isolate;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 10px 20px rgba(0, 0, 0, 0.2);
   }
 
   /* ============================================
-     APPLE DESIGN LANGUAGE - SOCIAL ICONS
-     Premium social icon styling with Apple's design principles:
-     - Minimalist, clean aesthetic
-     - Left-to-right hover sweep transition
-     - Smooth color transitions
-     - Soft shadows for depth
-     - Precise spacing and alignment
+     APPLE DESIGN LANGUAGE — SOCIAL ICONS
      ============================================ */
-
-  /* Base Social Icon - Clean Minimalist Foundation */
   .social-icon-adaptive {
-    /* Light mode - frosted glass */
     background: var(--btn-bg);
     border: 1px solid var(--btn-border);
     border-radius: 50%;
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
-
-    /* Required for pseudo-element positioning */
     position: relative;
     overflow: hidden;
     z-index: 1;
-
-    /* Shared Apple-style soft box shadow - matches buttons */
     box-shadow: var(--btn-shadow);
-
-    /* Smooth Apple-style transitions */
     transition:
       transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
 
-  /* Pseudo-element for left-to-right hover sweep effect */
   .social-icon-adaptive::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     z-index: -1;
     border-radius: 50%;
-
-    /* Light mode sweep color */
     background: rgba(0, 0, 0, 0.06);
-
-    /* Start hidden, scaled to 0 from left */
     transform: scaleX(0);
     transform-origin: left center;
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  /* Dark mode sweep color */
   .dark .social-icon-adaptive::before {
     background: rgba(255, 255, 255, 0.08);
   }
 
-  /* Hover: sweep from left to right */
   .social-icon-adaptive:hover::before {
     transform: scaleX(1);
     transform-origin: left center;
   }
 
-  /* Exit: sweep from right to left (reverse origin on mouse leave) */
   .social-icon-adaptive:not(:hover)::before {
     transform: scaleX(0);
     transform-origin: right center;
   }
 
-  /* Dark mode base - clean and minimal */
   .dark .social-icon-adaptive {
-    /* Background match: exact same white tint as buttons */
     background: var(--btn-bg);
     border: 1px solid var(--btn-border);
-
-    /* Apple-style soft box shadow for dark mode - matches buttons */
     box-shadow: var(--btn-shadow);
   }
 
-  /* Hover state - Light mode */
   .social-icon-adaptive:hover {
-    /* Gentle lift - Matches buttons */
     transform: translateY(-1px);
     border-color: rgba(0, 0, 0, 0.18);
-
-    /* Apple-style soft shadow for depth */
     box-shadow: var(--btn-hover-shadow);
   }
 
-  /* Hover state - Dark mode */
   .dark .social-icon-adaptive:hover {
-    /* Gentle lift - Matches buttons */
     transform: translateY(-1px);
     border-color: rgba(255, 255, 255, 0.18);
-
-    /* Apple-style soft shadow for depth */
     box-shadow: var(--btn-hover-shadow);
   }
 
-  /* Active/Pressed state - Light mode */
   .social-icon-adaptive:active {
     transform: translateY(0) scale(0.98);
     box-shadow: var(--btn-active-shadow);
     transition-duration: 0.1s;
   }
 
-  /* Active/Pressed state - Dark mode */
   .dark .social-icon-adaptive:active {
     transform: translateY(0) scale(0.98);
     box-shadow: var(--btn-active-shadow);
     transition-duration: 0.1s;
   }
 
-  /* Focus state for accessibility */
   .social-icon-adaptive:focus-visible {
     outline: none;
     box-shadow:
@@ -1140,35 +945,34 @@
       0 4px 12px rgba(0, 0, 0, 0.25);
   }
 
-  /* Icon Color - Light mode */
   .social-icon-color {
     color: rgba(0, 0, 0, 0.65);
     position: relative;
     z-index: 2;
-
-    /* Smooth transitions for color and scale */
+    width: clamp(1.25rem, 5vw, 1.5rem);
+    height: clamp(1.25rem, 5vw, 1.5rem);
+    object-fit: contain;
     transition:
       color 0.28s cubic-bezier(0.25, 0.1, 0.25, 1),
-      transform 0.28s cubic-bezier(0.25, 0.1, 0.25, 1);
+      transform 0.4s var(--ease-spring);
+    will-change: transform;
   }
 
-  /* Icon Color - Dark mode */
   .dark .social-icon-color {
     color: rgba(255, 255, 255, 0.7);
   }
 
+  .social-icon-adaptive:hover .social-icon-color {
+    transform: scale(1.18);
+  }
 
+  .social-icon-adaptive:active .social-icon-color {
+    transform: scale(0.95);
+  }
 
   /* ============================================
-     APPLE DESIGN LANGUAGE BUTTONS
-     Premium button styling with Apple's design principles:
-     - Smooth left-to-right hover transitions
-     - Elegant right-to-left exit animations
-     - Premium box shadows for depth
-     - Clean, refined aesthetics
+     APPLE DESIGN LANGUAGE — PRIMARY BUTTONS
      ============================================ */
-
-  /* Base styles for both buttons */
   .contact-button,
   .resume-button {
     position: relative;
@@ -1180,48 +984,12 @@
       transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  /* Pseudo-element for left-to-right hover sweep effect */
-  .contact-button::before,
-  .resume-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  /* Hover: sweep from left to right */
-  .contact-button:hover::before,
-  .resume-button:hover::before {
-    transform: scaleX(1);
-    transform-origin: left center;
-  }
-
-  /* Exit: sweep from right to left (reverse origin on mouse leave) */
-  .contact-button:not(:hover)::before,
-  .resume-button:not(:hover)::before {
-    transform: scaleX(0);
-    transform-origin: right center;
-  }
-
-  /* ---- PRIMARY ACTION BUTTONS (Say Hello & My Journey) - Filled Style ---- */
-  .contact-button,
-  .resume-button {
-    /* Light mode - elegant filled button with Apple-style shadow */
     background: var(--btn-bg) !important;
     border: 1px solid var(--btn-border) !important;
     color: var(--btn-text) !important;
     box-shadow: var(--btn-shadow);
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
-    /* NEW: Ensure identical widths and fill container */
     flex: 1;
     width: 100%;
     min-width: 0;
@@ -1231,13 +999,31 @@
 
   .contact-button::before,
   .resume-button::before {
-    /* Light mode hover sweep color */
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
     background: rgba(0, 0, 0, 0.08);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .contact-button:hover::before,
+  .resume-button:hover::before {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  .contact-button:not(:hover)::before,
+  .resume-button:not(:hover)::before {
+    transform: scaleX(0);
+    transform-origin: right center;
   }
 
   .dark .contact-button,
   .dark .resume-button {
-    /* Dark mode - elegant filled button with Apple-style shadow */
     background: var(--btn-bg) !important;
     border: 1px solid var(--btn-border) !important;
     color: var(--btn-text) !important;
@@ -1246,11 +1032,9 @@
 
   .dark .contact-button::before,
   .dark .resume-button::before {
-    /* Dark mode hover sweep color */
     background: rgba(255, 255, 255, 0.08);
   }
 
-  /* Button hover - light mode */
   .contact-button:hover,
   .resume-button:hover {
     border-color: rgba(0, 0, 0, 0.18) !important;
@@ -1258,7 +1042,6 @@
     box-shadow: var(--btn-hover-shadow);
   }
 
-  /* Button hover - dark mode */
   .dark .contact-button:hover,
   .dark .resume-button:hover {
     border-color: rgba(255, 255, 255, 0.18) !important;
@@ -1266,23 +1049,21 @@
     box-shadow: var(--btn-hover-shadow);
   }
 
-  /* Button active/pressed - light mode */
   .contact-button:active,
   .resume-button:active {
     transform: translateY(0) scale(0.98);
     box-shadow: var(--btn-active-shadow);
   }
 
-  /* Button active/pressed - dark mode */
   .dark .contact-button:active,
   .dark .resume-button:active {
     transform: translateY(0) scale(0.98);
     box-shadow: var(--btn-active-shadow);
   }
 
-
-
-  /* Modal glassomorphism - Enhanced for better readability */
+  /* ============================================
+     MODAL GLASSOMORPHISM
+     ============================================ */
   .modal-glass {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(24px) saturate(180%);
@@ -1307,7 +1088,6 @@
     font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   }
 
-  /* Modal content container for better readability */
   .modal-content-glass {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px) saturate(180%);
@@ -1322,9 +1102,7 @@
     font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   }
 
-  /* Apple Design Language Modal Close Button */
   .modal-close-button {
-    /* Light mode */
     border: 1px solid rgba(0, 0, 0, 0.1);
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(8px) saturate(180%);
@@ -1333,7 +1111,6 @@
   }
 
   .dark .modal-close-button {
-    /* Dark mode */
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px) saturate(180%);
@@ -1341,14 +1118,12 @@
   }
 
   .modal-close-button:hover {
-    /* Light mode hover */
     background: rgba(0, 0, 0, 0.06);
     border-color: rgba(0, 0, 0, 0.15);
     transform: scale(1.05);
   }
 
   .dark .modal-close-button:hover {
-    /* Dark mode hover */
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
@@ -1358,7 +1133,7 @@
     transform: scale(0.95);
   }
 
-  /* Input and textarea glassomorphism enhancement */
+  /* ---- Input/Textarea Glass ---- */
   input.glass-card,
   textarea.glass-card {
     background: rgba(255, 255, 255, 0.15);
@@ -1402,7 +1177,7 @@
     opacity: 0.7;
   }
 
-  /* Button glassomorphism enhancement */
+  /* ---- Button Glass ---- */
   button.glass-card {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(16px) saturate(180%);
@@ -1438,42 +1213,12 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
-  /* Enhanced 3D contact icon animation */
-  .contact-icon-3d {
-    transform-style: preserve-3d;
-    perspective: 1000px;
-  }
-
-  .contact-icon-3d:hover {
-    transform: translateY(-5px) rotateX(15deg) rotateY(15deg);
-    box-shadow:
-      0 20px 40px rgba(0, 0, 0, 0.12),
-      0 10px 20px rgba(0, 0, 0, 0.06);
-  }
-
-  .dark .contact-icon-3d:hover {
-    box-shadow:
-      0 20px 40px rgba(0, 0, 0, 0.4),
-      0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  @keyframes gentle-pulse {
-
-    0%,
-    100% {
-      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
-    }
-
-    50% {
-      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
-    }
-  }
-
-  /* Ultra-Responsive Layout System */
+  /* ============================================
+     MAIN LAYOUT
+     ============================================ */
   .main-layout {
     height: 100vh;
     height: 100dvh;
-    /* Dynamic viewport height for mobile */
     width: 100vw;
     overflow: hidden;
     display: flex;
@@ -1481,550 +1226,177 @@
     position: relative;
   }
 
-  .navbar-section {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 50;
-    padding-top: clamp(0.75rem, 1.5vh, 1.25rem);
-    padding-bottom: clamp(0.5rem, 1vh, 0.75rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .content-section {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: calc(clamp(45px, 6vh, 70px) + clamp(0.75rem, 1.5vh, 1.25rem) + clamp(0.5rem, 1vh, 0.75rem));
+    padding-top: calc(clamp(3rem, 6vh, 4rem) + clamp(0.75rem, 1.5vh, 1.25rem) + clamp(0.5rem, 1vh, 0.75rem));
     padding-left: clamp(0.5rem, 2vw, 2rem);
     padding-right: clamp(0.5rem, 2vw, 2rem);
     padding-bottom: clamp(0.5rem, 2vh, 1rem);
-    min-height: calc(100vh - clamp(45px, 6vh, 70px) - clamp(0.75rem, 1.5vh, 1.25rem) - clamp(0.5rem, 1vh, 0.75rem));
-    min-height: calc(100dvh - clamp(45px, 6vh, 70px) - clamp(0.75rem, 1.5vh, 1.25rem) - clamp(0.5rem, 1vh, 0.75rem));
+    min-height: calc(100dvh - clamp(3rem, 6vh, 4rem) - clamp(0.75rem, 1.5vh, 1.25rem) - clamp(0.5rem, 1vh, 0.75rem));
     width: 100%;
-    max-width: 100vw;
     overflow: hidden;
   }
 
-  /* Ultra-Wide Desktop (1920px+) */
-  @media (min-width: 1920px) {
-    .desktop-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: clamp(3rem, 5vw, 6rem);
-      align-items: center;
-      width: 100%;
-      padding: 0 clamp(2rem, 4vw, 4rem);
-    }
-
-    .mobile-layout {
-      display: none;
-    }
-
-    .responsive-role {
-      justify-content: flex-start;
-    }
-  }
-
-  /* Large Desktop (1400px - 1919px) */
-  @media (min-width: 1400px) and (max-width: 1919px) {
-    .desktop-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: clamp(2.5rem, 4vw, 4rem);
-      align-items: center;
-      width: 100%;
-      max-width: 1400px;
-      padding: 0 clamp(1.5rem, 3vw, 3rem);
-    }
-
-    .mobile-layout {
-      display: none;
-    }
-
-    .responsive-role {
-      justify-content: flex-start;
-    }
-  }
-
-  /* Standard Desktop (1024px - 1399px) */
-  @media (min-width: 1024px) and (max-width: 1399px) {
-    .desktop-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem, 3vw, 3rem);
-      align-items: center;
-      width: 100%;
-      max-width: 1200px;
-      padding: 0 clamp(1rem, 2.5vw, 2rem);
-    }
-
-    .mobile-layout {
-      display: none;
-    }
-
-    .responsive-role {
-      justify-content: flex-start;
-    }
-  }
-
-  /* Tablet Portrait (768px - 1023px, Portrait) */
-  @media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
-    .desktop-grid {
-      display: none;
-    }
-
-    .mobile-layout {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      max-width: 700px;
-      padding: 0 clamp(1.5rem, 4vw, 3rem);
-      gap: clamp(1.25rem, 3vw, 2rem);
-    }
-
-    .avatar-container {
-      transform: scale(clamp(0.65, 10vw, 0.85));
-    }
-
-    .responsive-role {
-      justify-content: center;
-    }
-  }
-
-  /* Tablet Landscape (768px - 1023px, Landscape) */
-  @media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
-    .desktop-grid {
-      display: none;
-    }
-
-    .mobile-layout {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      text-align: left;
-      max-width: 100%;
-      padding: 0 clamp(1rem, 3vw, 2rem);
-      gap: clamp(2rem, 4vw, 3rem);
-    }
-
-    .mobile-layout> :first-child {
-      order: 2;
-      flex: 0 0 auto;
-    }
-
-    .mobile-layout> :last-child {
-      order: 1;
-      flex: 1;
-    }
-
-    .avatar-container {
-      transform: scale(clamp(0.5, 8vw, 0.7));
-    }
-
-    .responsive-role {
-      justify-content: flex-start;
-    }
-
+  /* Landscape mobile: allow scroll & compact spacing
+     Note: max-height is permitted — the rule only restricts max-width */
+  @media (max-height: 37.5rem) and (min-width: 480px) {
     .content-section {
-      padding-top: calc(clamp(40px, 5.5vh, 60px) + clamp(0.5rem, 1vh, 0.75rem) + clamp(0.5rem, 1vh, 0.75rem));
-      padding-bottom: clamp(0.5rem, 1vh, 0.75rem);
+      padding-top: calc(clamp(2.5rem, 5.5vh, 3.75rem) + clamp(0.5rem, 1vh, 0.75rem) + clamp(0.5rem, 1vh, 0.75rem));
+      padding-bottom: clamp(0.25rem, 1vh, 0.5rem);
     }
-
     .navbar-section {
       padding-top: clamp(0.5rem, 1vh, 0.75rem);
       padding-bottom: clamp(0.5rem, 1vh, 0.75rem);
     }
-  }
-
-  /* Large Mobile (425px - 767px) */
-  @media (min-width: 425px) and (max-width: 767px) {
-    .desktop-grid {
-      display: none;
-    }
-
     .mobile-layout {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      max-width: 100%;
-      padding: 0 clamp(1rem, 3vw, 1.5rem);
-      gap: clamp(0.875rem, 2.5vw, 1.25rem);
-      overflow: visible;
-    }
-
-    .avatar-container {
-      transform: scale(clamp(0.5, 12vw, 0.65));
-    }
-
-    .responsive-role {
-      justify-content: center;
-    }
-
-    /* Text isolation for animation stability */
-    .mobile-layout .responsive-bio,
-    .mobile-layout .responsive-name,
-    .mobile-layout .responsive-role {
-      isolation: isolate;
-      will-change: auto;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-    }
-  }
-
-  /* Medium Mobile (375px - 424px) */
-  @media (min-width: 375px) and (max-width: 424px) {
-    .desktop-grid {
-      display: none;
-    }
-
-    .mobile-layout {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      max-width: 100%;
-      padding: 0 clamp(0.875rem, 2.5vw, 1.25rem);
-      gap: clamp(0.75rem, 2vw, 1rem);
-      overflow: visible;
-    }
-
-    .avatar-container {
-      transform: scale(clamp(0.45, 10vw, 0.6));
-    }
-
-    .responsive-role {
-      justify-content: center;
-    }
-
-    /* Text isolation for animation stability */
-    .mobile-layout .responsive-bio,
-    .mobile-layout .responsive-name,
-    .mobile-layout .responsive-role {
-      isolation: isolate;
-      will-change: auto;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-    }
-  }
-
-  /* Small Mobile (320px - 374px) */
-  @media (max-width: 374px) {
-    .desktop-grid {
-      display: none;
-    }
-
-    .mobile-layout {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      max-width: 100%;
-      padding: 0 clamp(0.5rem, 2vw, 1rem);
-      gap: clamp(0.625rem, 1.5vw, 0.875rem);
-      overflow: visible;
-    }
-
-    .avatar-container {
-      transform: scale(clamp(0.4, 8vw, 0.55));
-    }
-
-    .responsive-role {
-      justify-content: center;
-    }
-
-    /* Enhanced text isolation for small screens */
-    .mobile-layout .responsive-bio,
-    .mobile-layout .responsive-name,
-    .mobile-layout .responsive-role {
-      isolation: isolate;
-      will-change: auto;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-    }
-  }
-
-  /* Mobile Landscape (All mobile sizes in landscape) */
-  @media (max-width: 767px) and (orientation: landscape) and (max-height: 500px) {
-    .desktop-grid {
-      display: none;
-    }
-
-    .mobile-layout {
-      display: flex;
       flex-direction: row;
-      align-items: center;
       text-align: left;
-      max-width: 100%;
-      padding: 0 clamp(0.5rem, 2vw, 1rem);
       gap: clamp(1rem, 3vw, 2rem);
-      overflow: visible;
+      padding: 0 clamp(0.5rem, 2vw, 1rem);
     }
-
-    .mobile-layout> :first-child {
+    .mobile-layout > :first-child {
       order: 2;
       flex: 0 0 auto;
     }
-
-    .mobile-layout> :last-child {
+    .mobile-layout > :last-child {
       order: 1;
       flex: 1;
     }
-
+    body, html {
+      overflow-y: auto !important;
+      height: auto !important;
+    }
     .avatar-container {
       transform: scale(clamp(0.3, 6vw, 0.5));
     }
-
-    .responsive-role {
-      justify-content: flex-start;
-    }
-
-    .content-section {
-      padding-top: calc(clamp(40px, 5.5vh, 60px) + clamp(0.5rem, 1vh, 0.75rem) + clamp(0.5rem, 1vh, 0.75rem));
-      padding-bottom: clamp(0.25rem, 1vh, 0.5rem);
-    }
-
-    .navbar-section {
-      padding-top: clamp(0.5rem, 1vh, 0.75rem);
-      padding-bottom: clamp(0.5rem, 1vh, 0.75rem);
-    }
-
-    /* Compact spacing for landscape */
-    .mobile-layout .space-y-4>*+* {
+    .mobile-layout .space-y-4 > * + * {
       margin-top: clamp(0.25rem, 1vh, 0.75rem) !important;
     }
   }
 
-  /* Ultra-small screens (below 320px) */
-  @media (max-width: 319px) {
+  /* Tablet landscape: row layout */
+  @media (min-width: 768px) and (orientation: landscape) and (max-height: 37.5rem) {
     .mobile-layout {
-      padding: 0 0.25rem;
-      gap: 0.5rem;
+      flex-direction: row;
+      text-align: left;
+      padding: 0 clamp(1rem, 3vw, 2rem);
+      gap: clamp(2rem, 4vw, 3rem);
     }
-
+    .mobile-layout > :first-child {
+      order: 2;
+      flex: 0 0 auto;
+    }
+    .mobile-layout > :last-child {
+      order: 1;
+      flex: 1;
+    }
     .avatar-container {
-      transform: scale(0.35);
+      transform: scale(clamp(0.5, 8vw, 0.7));
     }
-
-    .responsive-name {
-      font-size: clamp(1.25rem, 8vw, 1.5rem);
-    }
-
     .responsive-role {
-      font-size: clamp(0.75rem, 6vw, 0.875rem);
+      justify-content: flex-start;
     }
-
-    .responsive-bio {
-      font-size: clamp(0.7rem, 4vw, 0.8rem);
+    .content-section {
+      padding-top: calc(clamp(2.5rem, 5.5vh, 3.75rem) + clamp(0.5rem, 1vh, 0.75rem) + clamp(0.5rem, 1vh, 0.75rem));
+      padding-bottom: clamp(0.5rem, 1vh, 0.75rem);
     }
-
-    .responsive-welcome {
-      font-size: clamp(0.625rem, 3vw, 0.75rem);
+    .navbar-section {
+      padding-top: clamp(0.5rem, 1vh, 0.75rem);
+      padding-bottom: clamp(0.5rem, 1vh, 0.75rem);
     }
   }
 
-  /* Ultra-wide Desktop Enhancements (2560px+) */
-  @media (min-width: 2560px) {
-    .desktop-grid {
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: clamp(4rem, 6vw, 8rem);
-      max-width: 2200px;
-      padding: 0 clamp(3rem, 5vw, 6rem);
+  /* md (768px) tablet portrait: use centered column layout */
+  @media (min-width: 768px) and (orientation: portrait) {
+    .mobile-layout {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 clamp(1.5rem, 4vw, 3rem);
+      gap: clamp(1.25rem, 3vw, 2rem);
     }
-
-    .responsive-name {
-      font-size: clamp(4rem, 5vw, 5.5rem);
+    .avatar-container {
+      transform: scale(clamp(0.65, 10vw, 0.85));
     }
-
     .responsive-role {
-      font-size: clamp(1.5rem, 2vw, 2rem);
-    }
-
-    .responsive-bio {
-      font-size: clamp(1.125rem, 1.5vw, 1.375rem);
-    }
-
-    .responsive-welcome {
-      font-size: clamp(1rem, 1.2vw, 1.25rem);
+      justify-content: center;
     }
   }
 }
 
+/* =============================================
+   KEYFRAME ANIMATIONS
+   ============================================= */
 @keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-  }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-20px) rotate(180deg); }
 }
 
 @keyframes pulse-glow {
-  0% {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
-
-  100% {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1);
-  }
+  0%   { box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
+  100% { box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1); }
 }
 
 @keyframes neural-pulse {
-
-  0%,
-  100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.8; transform: scale(1.05); }
 }
 
 @keyframes typewriter {
-
-  0%,
-  20% {
-    width: 0;
-  }
-
-  50%,
-  70% {
-    width: 100%;
-  }
-
-  90%,
-  100% {
-    width: 0;
-  }
+  0%, 20%   { width: 0; }
+  50%, 70%  { width: 100%; }
+  90%, 100% { width: 0; }
 }
 
 @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes bounce-soft {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.05);
-  }
-
-  100% {
-    transform: scale(1);
-  }
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+@keyframes gentle-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2); }
+  50%       { box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); }
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite alternate;
-}
+/* ---- Animation Utility Classes ---- */
+.animate-float        { animation: float 6s ease-in-out infinite; }
+.animate-pulse-glow   { animation: pulse-glow 2s ease-in-out infinite alternate; }
+.animate-neural-pulse { animation: neural-pulse 3s ease-in-out infinite; }
+.animate-typewriter   { animation: typewriter 4s steps(40) infinite; }
+.animate-fade-in-up   { animation: fade-in-up 0.8s ease-out; }
+.animate-scale-in     { animation: scale-in 0.5s ease-out; }
+.animate-bounce-soft  { animation: bounce-soft 0.6s ease-out; }
 
-.animate-neural-pulse {
-  animation: neural-pulse 3s ease-in-out infinite;
-}
-
-.animate-typewriter {
-  animation: typewriter 4s steps(40) infinite;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out;
-}
-
-.animate-scale-in {
-  animation: scale-in 0.5s ease-out;
-}
-
-.animate-bounce-soft {
-  animation: bounce-soft 0.6s ease-out;
-}
-
-/* Shared width constraint for Hero Section elements (Name, Bio, Buttons) */
+/* =============================================
+   HERO CONTENT CONSTRAINT
+   Mobile-first width scaling via min-width only
+   ============================================= */
 .hero-content-constraint {
   max-width: 100%;
   width: 100%;
 }
 
-/* Ultra-Wide Displays (2560px+) */
-@media (min-width: 2560px) {
+@media (min-width: 480px) {
   .hero-content-constraint {
-    max-width: 75%;
-    width: 75%;
+    padding: 0 0.5rem;
   }
 }
 
-/* Wide Desktop (1440px-2559px) */
-@media (min-width: 1440px) and (max-width: 2559px) {
-  .hero-content-constraint {
-    max-width: 80%;
-    width: 80%;
-  }
-}
-
-/* Standard Desktop (1200px-1439px) */
-@media (min-width: 1200px) and (max-width: 1439px) {
-  .hero-content-constraint {
-    max-width: 80%;
-    width: 80%;
-  }
-}
-
-/* Laptop (1024px-1199px) */
-@media (min-width: 1024px) and (max-width: 1199px) {
-  .hero-content-constraint {
-    max-width: 80%;
-    width: 80%;
-  }
-}
-
-/* Foldable Portrait & Small Tablets (853px-1023px) */
-@media (min-width: 853px) and (max-width: 1023px) {
-  .hero-content-constraint {
-    max-width: 90%;
-    width: 90%;
-    padding: 0 1rem;
-  }
-}
-
-/* Tablet Landscape (768px-852px) */
-@media (min-width: 768px) and (max-width: 852px) {
+@media (min-width: 768px) {
   .hero-content-constraint {
     max-width: 95%;
     width: 95%;
@@ -2032,59 +1404,24 @@
   }
 }
 
-/* Mobile Landscape & Small Tablets (576px-767px) */
-@media (min-width: 576px) and (max-width: 767px) {
+@media (min-width: 1024px) {
   .hero-content-constraint {
-    max-width: 100%;
-    width: 100%;
-    padding: 0 0.5rem;
+    max-width: 80%;
+    width: 80%;
+    padding: 0 1rem;
   }
 }
 
-/* Mobile Portrait (320px-575px) */
-@media (min-width: 320px) and (max-width: 575px) {
+@media (min-width: 1280px) {
   .hero-content-constraint {
-    max-width: 100%;
-    width: 100%;
-    padding: 0 0.25rem;
+    max-width: 80%;
+    width: 80%;
   }
 }
 
-/* Micro Devices (<320px) */
-@media (max-width: 319px) {
+@media (min-width: 1536px) {
   .hero-content-constraint {
-    max-width: 100%;
-    width: 100%;
+    max-width: 75%;
+    width: 75%;
   }
-}
-
-/* Adaptive Social Icons for Touch Targets */
-.social-icon-adaptive {
-  min-width: 44px;
-  /* Apple/Accessibility standard recommendation */
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-
-
-/* Ensure icons scale but stay centered */
-.social-icon-color {
-  width: clamp(1.25rem, 5vw, 1.5rem);
-  height: clamp(1.25rem, 5vw, 1.5rem);
-  object-fit: contain;
-  transition: transform 0.4s var(--ease-spring);
-  will-change: transform;
-}
-
-.social-icon-adaptive:hover .social-icon-color {
-  transform: scale(1.18);
-}
-
-.social-icon-adaptive:active .social-icon-color {
-  transform: scale(0.95);
 }

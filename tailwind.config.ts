@@ -5,24 +5,11 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     screens: {
-      'xs': '320px',
-      'sm': '640px',
-      'md': '768px',
-      'fold': '853px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1400px',
-      '3xl': '1600px',
-      '4xl': '1920px',
-      // Custom breakpoints for ultra-wide and specific device types
-      'ultra': '2560px',
-      'zenbook-fold': { 'raw': '(min-width: 853px) and (max-width: 1280px)' },
-      'tablet-portrait': { 'raw': '(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)' },
-      'tablet-landscape': { 'raw': '(min-width: 1024px) and (max-width: 1366px) and (orientation: landscape)' },
-      'mobile-landscape': { 'raw': '(max-width: 767px) and (orientation: landscape)' },
-      'mobile-small': { 'raw': '(max-width: 374px)' },
-      'mobile-medium': { 'raw': '(min-width: 375px) and (max-width: 424px)' },
-      'mobile-large': { 'raw': '(min-width: 425px) and (max-width: 767px)' },
+      'sm':  '480px',   // large phones
+      'md':  '768px',   // tablets
+      'lg':  '1024px',  // small laptops
+      'xl':  '1280px',  // desktops
+      '2xl': '1536px',  // large desktops
     },
     fontFamily: {
       sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
@@ -83,17 +70,19 @@ export default {
           primary: "var(--sidebar-primary)",
           "primary-foreground": "var(--sidebar-primary-foreground)",
           accent: "var(--sidebar-accent)",
-          "accent-foreground": "var(--sidebar-accent-foreground)",
+          "accent-foreground": "var(--sidebar-accent-accent-foreground)",
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
       },
-      "accordion-down": "accordion-down 0.2s ease-out",
-      "accordion-up": "accordion-up 0.2s ease-out",
-      "fade-in": "fade-in 0.6s var(--ease-apple) forwards",
-      "fade-up": "fade-up 0.8s var(--ease-apple) forwards",
-      "scale-in": "scale-in 0.4s var(--ease-spring) forwards",
-      "slide-in-right": "slide-in-right 0.5s var(--ease-apple) forwards",
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.6s var(--ease-apple) forwards",
+        "fade-up": "fade-up 0.8s var(--ease-apple) forwards",
+        "scale-in": "scale-in 0.4s var(--ease-spring) forwards",
+        "slide-in-right": "slide-in-right 0.5s var(--ease-apple) forwards",
+      },
     },
     transitionTimingFunction: {
       "apple": "cubic-bezier(0.25, 0.1, 0.25, 1)",
