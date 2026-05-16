@@ -69,8 +69,35 @@
   --glass-blur: blur(20px) saturate(180%);
   --glass-content-bg: rgba(255, 255, 255, 0.95);
 
+  /* Glass elevation shadows — theme-aware, not animated (View Transition crossfades) */
+  --glass-elevated-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --glass-elevated-shadow-hover:
+    0 4px 12px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --glass-card-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --glass-pressed-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --glass-focus-ring:
+    0 0 0 3px rgba(0, 0, 0, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+  --glass-lift-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 10px 20px rgba(0, 0, 0, 0.06);
+  --modal-panel-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+
   /* Shared height for navbar buttons */
   --nav-btn-height: clamp(2rem, 3.5vw, 2.5rem);
+  --nav-icon-size: clamp(1.125rem, 2vw, 1.375rem);
+
+  /* Theme switch — single duration everywhere */
+  --theme-transition-duration: 120ms;
+  --theme-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark {
@@ -121,6 +148,117 @@
   --glass-shadow-inner: rgba(255, 255, 255, 0.15);
   --glass-blur: blur(20px) saturate(180%);
   --glass-content-bg: rgba(0, 0, 0, 0.85);
+
+  --glass-elevated-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  --glass-elevated-shadow-hover:
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  --glass-card-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 1px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  --glass-pressed-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --glass-focus-ring:
+    0 0 0 3px rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.25);
+  --glass-lift-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 10px 20px rgba(0, 0, 0, 0.2);
+  --modal-panel-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* =============================================
+   THEME SWITCH — smooth crossfade & fallbacks
+   ============================================= */
+html {
+  view-transition-name: root;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--theme-transition-duration);
+  animation-timing-function: var(--theme-transition-easing);
+}
+
+::view-transition-old(root) {
+  animation-name: theme-crossfade-out;
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  animation-name: theme-crossfade-in;
+  z-index: 2;
+}
+
+@keyframes theme-crossfade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes theme-crossfade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.theme-switch-skip {
+  view-transition-name: none !important;
+}
+
+html.theme-transition,
+html.theme-transition *:not(.theme-switch-skip):not(.theme-switch-skip *),
+html.theme-transition *:not(.theme-switch-skip):not(.theme-switch-skip *)::before,
+html.theme-transition *:not(.theme-switch-skip):not(.theme-switch-skip *)::after {
+  /* box-shadow omitted — multi-layer shadows cannot interpolate between themes */
+  transition-property:
+    background-color,
+    color,
+    border-color,
+    outline-color,
+    fill,
+    stroke;
+  transition-duration: var(--theme-transition-duration);
+  transition-timing-function: var(--theme-transition-easing);
+  transition-delay: 0s;
+}
+
+/* Glass UI: shadows swap via CSS variables; never tween during theme switch */
+html.theme-transition .navbar-glass,
+html.theme-transition .apple-theme-toggle,
+html.theme-transition .apple-newsletter-button,
+html.theme-transition .glass-card,
+html.theme-transition .social-icon-adaptive,
+html.theme-transition .contact-button,
+html.theme-transition .resume-button,
+html.theme-transition .contact-icon-3d,
+html.theme-transition .modal-panel,
+html.theme-transition .modal-glass {
+  transition-property: background-color, color, border-color, outline-color !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms;
+  }
+
+  html.theme-transition,
+  html.theme-transition *:not(.theme-switch-skip):not(.theme-switch-skip *),
+  html.theme-transition *:not(.theme-switch-skip):not(.theme-switch-skip *)::before,
+  html.theme-transition *:not(.theme-switch-skip):not(.theme-switch-skip *)::after {
+    transition-duration: 0.01ms;
+  }
 }
 
 /* =============================================
@@ -222,19 +360,19 @@
   /* ---- Glassmorphism Navbar ---- */
   .navbar-glass {
     /* Base: 320px+ */
-    width: calc(100% - 1.5rem);
+    width: calc(100% - clamp(1.5rem, 6vw, 2.5rem));
     height: clamp(3rem, 6vh, 4rem);
-    padding: 0 clamp(0.75rem, 2vw, 1.25rem);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 0 clamp(0.875rem, 3vw, 1.5rem);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
     border-radius: 9999px;
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.12),
-      0 2px 8px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    transition: all 0.3s ease;
+    box-shadow: var(--glass-elevated-shadow);
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      transform 0.3s ease;
     display: flex;
     align-items: center;
     margin: 0 auto;
@@ -254,17 +392,6 @@
     }
   }
 
-  .dark .navbar-glass {
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  }
-
   /* ---- Navbar Section ---- */
   .navbar-section {
     background: transparent;
@@ -282,26 +409,14 @@
 
   /* ---- Universal Glass Card ---- */
   .glass-card {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--glass-bg);
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.1),
-      0 1px 4px rgba(0, 0, 0, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.7);
-    transition: all 0.3s ease;
-  }
-
-  .dark .glass-card {
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.3),
-      0 1px 4px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-card-shadow);
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
   }
 
   /* ---- Typography ---- */
@@ -309,13 +424,20 @@
     white-space: nowrap;
     overflow: visible;
     display: block;
-    width: auto;
-    min-width: fit-content;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .name-single-line {
+      width: auto;
+      min-width: fit-content;
+    }
   }
 
   /* Fluid type — clamp handles all sizes without breakpoints */
   .responsive-name {
-    font-size: clamp(1.5rem, 4vw + 0.5rem, 3.5rem);
+    font-size: clamp(1.375rem, 3.5vw + 0.75rem, 3.5rem);
     line-height: clamp(1.05, 0.8vw + 0.95, 1.15);
     font-weight: 700;
     letter-spacing: clamp(-0.03em, -0.01vw, -0.02em);
@@ -324,29 +446,40 @@
     color: var(--name-text-color);
   }
 
+  @media (min-width: 1024px) {
+    .responsive-name {
+      font-size: clamp(1.5rem, 4vw + 0.5rem, 3.5rem);
+    }
+  }
+
   .responsive-role {
-    font-size: clamp(0.875rem, 2.2vw + 0.2rem, 1.75rem);
-    line-height: clamp(1.15, 0.4vw + 1.05, 1.3);
+    font-size: clamp(0.9375rem, 2.2vw + 0.35rem, 1.75rem);
+    line-height: clamp(1.2, 0.4vw + 1.1, 1.35);
     height: auto;
-    min-height: clamp(1.2rem, 2.5vw + 0.5rem, 2.5rem);
+    min-height: clamp(1.5rem, 2.5vw + 0.75rem, 2.5rem);
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    max-width: 100%;
+    overflow: visible;
     font-weight: 500;
-    word-break: keep-all;
+    word-break: normal;
   }
 
   @media (min-width: 1024px) {
     .responsive-role {
       justify-content: flex-start;
+      min-height: clamp(1.2rem, 2.5vw + 0.5rem, 2.5rem);
+      word-break: keep-all;
+      overflow: visible;
     }
   }
 
   /* ---- Bio Text ---- */
   .responsive-bio {
-    font-size: clamp(0.8rem, 1.8vw + 0.2rem, 1.35rem);
-    line-height: clamp(1.4, 0.35vw + 1.3, 1.75);
+    font-size: clamp(0.875rem, 1.6vw + 0.35rem, 1.35rem);
+    line-height: clamp(1.5, 0.35vw + 1.35, 1.75);
     font-weight: 400;
     letter-spacing: clamp(0.01em, 0.003vw, 0.02em);
     word-break: normal;
@@ -421,7 +554,7 @@
   }
 
   .avatar-container {
-    margin-bottom: 1.5rem;
+    margin-bottom: clamp(0.75rem, 2vh, 1.5rem);
   }
 
   /* sm (480px+): more breathing room */
@@ -447,7 +580,7 @@
     }
   }
 
-  /* lg (1024px+): switch to desktop side-by-side grid */
+  /* lg (1024px+): desktop grid — except tall portrait tablets (iPad Pro 1024×1366) */
   @media (min-width: 1024px) {
     .mobile-layout {
       display: none;
@@ -463,6 +596,125 @@
       width: 100%;
       max-width: 75rem;
       padding: 0 clamp(1rem, 2.5vw, 2rem);
+    }
+  }
+
+  /* iPad Pro portrait & same width as Nest Hub but tall — keep tablet column layout */
+  @media (min-width: 1024px) and (max-width: 1024px) and (min-height: 681px) {
+    .mobile-layout {
+      display: flex !important;
+    }
+    .desktop-layout {
+      display: none !important;
+    }
+    .desktop-grid {
+      display: none !important;
+    }
+  }
+
+  /*
+   * Compact desktop (Nest Hub 1024×600, laptops 1024–1279px):
+   * Readable measure — wider than 75% default, not stretched edge-to-edge.
+   */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .desktop-grid {
+      --desktop-content-measure: min(100%, 29rem);
+      --desktop-block-gap: clamp(0.75rem, 1.5vh, 1.125rem);
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(1rem, 1.75vw, 1.75rem);
+      max-width: 100%;
+      padding: 0 clamp(0.75rem, 1.5vw, 1.5rem);
+    }
+
+    .desktop-grid .text-content-isolated {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .desktop-grid .text-content-isolated.home-section-spacing > * + * {
+      margin-top: var(--desktop-block-gap) !important;
+    }
+
+    .desktop-grid .text-content-isolated .home-section-spacing > * + * {
+      margin-top: clamp(0.5rem, 1vh, 0.875rem) !important;
+    }
+
+    /* About, buttons, and social — identical outer width */
+    .desktop-grid .desktop-content-block {
+      width: var(--desktop-content-measure) !important;
+      max-width: var(--desktop-content-measure) !important;
+      min-width: 0;
+      box-sizing: border-box;
+      padding-inline: 0;
+    }
+
+    .desktop-grid [aria-label="Contact and resume actions"].desktop-content-block {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: clamp(0.625rem, 1vw, 0.875rem);
+    }
+
+    .desktop-grid [aria-label="Contact and resume actions"] .contact-button,
+    .desktop-grid [aria-label="Contact and resume actions"] .resume-button {
+      flex: 1 1 0;
+      width: auto;
+      min-width: 0;
+      max-width: none;
+    }
+
+    .desktop-grid .desktop-content-block.flex.justify-between {
+      justify-content: space-between !important;
+      gap: clamp(0.5rem, 0.65rem, 0.75rem) !important;
+    }
+
+    .desktop-grid .social-icon-adaptive {
+      min-width: 2.375rem;
+      min-height: 2.375rem;
+    }
+
+    .desktop-grid .social-icon-color {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .desktop-grid .avatar-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .desktop-grid .avatar-responsive {
+      width: clamp(15rem, 26vw, 19.5rem);
+      height: clamp(15rem, 26vw, 19.5rem);
+    }
+  }
+
+  /* Nest Hub & short landscape desktop (1024×600, height ≤680px) */
+  @media (min-width: 1024px) and (max-width: 1279px) and (max-height: 680px) {
+    .content-section {
+      overflow-y: auto;
+      align-items: center;
+      padding-top: calc(
+        clamp(2.5rem, 5vh, 3.25rem) +
+        clamp(0.5rem, 1vh, 0.75rem) +
+        clamp(0.25rem, 0.75vh, 0.5rem)
+      );
+      padding-bottom: clamp(0.5rem, 1.5vh, 1rem);
+    }
+
+    .desktop-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    .desktop-grid .avatar-responsive {
+      width: clamp(14.5rem, 28vw, 18.5rem);
+      height: clamp(14.5rem, 28vw, 18.5rem);
+    }
+
+    .desktop-grid .text-content-isolated.home-section-spacing > * + * {
+      margin-top: clamp(0.625rem, 1.35vh, 0.9375rem) !important;
     }
   }
 
@@ -489,6 +741,57 @@
     }
   }
 
+  /* ---- Avatar sizing — smaller on mobile/tablet, original on desktop ---- */
+  .avatar-responsive {
+    width: clamp(9.5rem, 36vw, 14rem);
+    height: clamp(9.5rem, 36vw, 14rem);
+    aspect-ratio: 1;
+    perspective: 1000px;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 480px) and (max-width: 1023px) {
+    .avatar-responsive {
+      width: clamp(11rem, 34vw, 18rem);
+      height: clamp(11rem, 34vw, 18rem);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .avatar-responsive {
+      width: clamp(17.5rem, 22vw, 24rem);
+      height: clamp(17.5rem, 22vw, 24rem);
+    }
+  }
+
+  /* ---- Mobile-only layout helpers ---- */
+  .mobile-text-column {
+    padding-inline: clamp(0.25rem, 1.5vw, 0.75rem);
+  }
+
+  .social-icons-mobile {
+    justify-content: center !important;
+    flex-wrap: wrap;
+    gap: clamp(0.5rem, 2.5vw, 1rem) !important;
+    max-width: 24rem;
+    margin-inline: auto;
+    overflow: visible !important;
+    padding-top: 0.125rem;
+    padding-bottom: 0.75rem;
+    padding-inline: var(--social-shadow-inset, 0.625rem);
+    box-sizing: border-box;
+  }
+
+  /* ---- Neural background overlay ---- */
+  .neural-bg {
+    opacity: 0.6;
+    background:
+      radial-gradient(circle at 15% 40%, hsla(270, 85%, 60%, 0.12) 0%, transparent 45%),
+      radial-gradient(circle at 85% 25%, hsla(188, 95%, 44%, 0.12) 0%, transparent 45%),
+      radial-gradient(circle at 50% 85%, hsla(328, 85%, 70%, 0.08) 0%, transparent 45%);
+    animation: neural-pulse 8s ease-in-out infinite;
+  }
+
   /* Foldable container helper (used between md and lg) */
   .foldable-container {
     width: 100%;
@@ -506,19 +809,28 @@
   /* ---- Responsive Buttons ---- */
   .responsive-button {
     /* Base (320px+): full-width stacked on mobile */
-    padding: 0.55rem 1.25rem;
-    font-size: clamp(0.825rem, 1.2vw + 0.3rem, 1.125rem);
+    padding: clamp(0.625rem, 1.5vw, 0.875rem) clamp(1.25rem, 4vw, 2rem);
+    font-size: clamp(0.875rem, 1.2vw + 0.35rem, 1.125rem);
     border-radius: 9999px;
     width: 100%;
     min-width: 100%;
   }
 
-  /* sm (480px+): auto-width, pill sizing */
+  /* sm (480px+): desktop layout button sizing */
   @media (min-width: 480px) {
     .responsive-button {
       padding: clamp(0.75rem, 1.5vw + 0.25rem, 1.25rem) clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
       min-width: clamp(8.75rem, 20vw, 11.25rem);
       width: auto;
+    }
+  }
+
+  /* Mobile layout: keep full-width buttons until tablet */
+  @media (max-width: 1023px) {
+    .mobile-layout .responsive-button {
+      width: 100%;
+      min-width: 0;
+      flex: 1 1 auto;
     }
   }
 
@@ -543,11 +855,22 @@
     width: 100%;
   }
 
-  @media (min-width: 768px) {
-    .bio-full-width {
+  @media (max-width: 1023px) {
+    .bio-full-width:not(.social-icons-mobile) {
+      padding-inline: clamp(0.25rem, 1vw, 0.5rem);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .bio-full-width:not(.social-icons-mobile) {
       max-width: 95%;
       width: 95%;
-      padding: 0 0.75rem;
+      padding-inline: clamp(0.5rem, 2vw, 1rem);
+    }
+
+    .bio-full-width.social-icons-mobile {
+      max-width: 100%;
+      width: 100%;
     }
   }
 
@@ -604,12 +927,24 @@
   }
 
   .typing-container-isolated {
-    isolation: isolate;
-    transform: translateZ(0);
-    contain: layout style paint;
     position: relative;
     z-index: 2;
-    overflow: hidden;
+    overflow: visible;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .typing-container-isolated {
+      isolation: isolate;
+      transform: translateZ(0);
+      contain: layout style paint;
+      overflow: hidden;
+      display: block;
+      justify-content: flex-start;
+    }
   }
 
   .typing-animation-isolated {
@@ -618,13 +953,22 @@
     transform: translateZ(0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    overflow: visible;
+    max-width: 100%;
   }
 
   .typing-animation-container {
-    isolation: isolate;
-    transform: translateZ(0);
-    contain: layout style paint;
-    will-change: transform;
+    overflow: visible;
+    max-width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .typing-animation-container {
+      isolation: isolate;
+      transform: translateZ(0);
+      contain: layout style paint;
+      will-change: transform;
+    }
   }
 
   .typing-text-isolated {
@@ -648,26 +992,34 @@
     -webkit-backface-visibility: hidden;
   }
 
+  @media (max-width: 1023px) {
+    .text-content-isolated {
+      contain: none;
+      max-width: 100%;
+      overflow: visible;
+    }
+
+    .text-content-isolated > * {
+      contain: none;
+    }
+  }
+
   /* ============================================
      APPLE DESIGN LANGUAGE — NEWSLETTER BUTTON
      ============================================ */
   .apple-newsletter-button {
-    background: rgba(255, 255, 255, 0.15) !important;
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    backdrop-filter: blur(20px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-    color: hsl(0, 0%, 9%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    background: var(--glass-bg) !important;
+    background-color: var(--glass-bg) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    color: var(--btn-text) !important;
+    border: 1px solid var(--glass-border) !important;
     padding-left: clamp(0.875rem, 2vw, 1.125rem);
     padding-right: clamp(0.875rem, 2vw, 1.125rem);
     height: var(--nav-btn-height) !important;
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      0 2px 8px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    box-shadow: var(--glass-elevated-shadow);
     transition:
       transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
@@ -702,19 +1054,6 @@
     transform-origin: right center;
   }
 
-  .dark .apple-newsletter-button {
-    background: rgba(0, 0, 0, 0.25) !important;
-    background-color: rgba(0, 0, 0, 0.25) !important;
-    backdrop-filter: blur(20px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-    color: hsl(0, 0%, 98%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
-  }
-
   .apple-newsletter-button:hover {
     transform: translateY(-1px);
     border-color: rgba(0, 0, 0, 0.18) !important;
@@ -729,125 +1068,87 @@
 
   .apple-newsletter-button:active {
     transform: translateY(0) scale(0.98);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--glass-pressed-shadow);
   }
 
   .dark .apple-newsletter-button:active {
     transform: translateY(0) scale(0.98);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   /* ============================================
      APPLE DESIGN LANGUAGE — THEME TOGGLE
+     Same styles all breakpoints — size via --nav-btn-height / --nav-icon-size
      ============================================ */
   .apple-theme-toggle {
-    background: rgba(255, 255, 255, 0.15) !important;
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    backdrop-filter: blur(20px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-    color: hsl(0, 0%, 9%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    background: var(--glass-bg) !important;
+    background-color: var(--glass-bg) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    color: var(--btn-text) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 9999px !important;
     width: var(--nav-btn-height) !important;
     height: var(--nav-btn-height) !important;
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      0 2px 8px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-    padding: 0;
+    min-width: var(--nav-btn-height) !important;
+    min-height: var(--nav-btn-height) !important;
+    max-width: var(--nav-btn-height) !important;
+    max-height: var(--nav-btn-height) !important;
+    padding: 0 !important;
+    box-shadow: var(--glass-elevated-shadow);
+    transition:
+      transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+      background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+      border-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+      color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
   }
 
-  .dark .apple-theme-toggle {
-    background: rgba(0, 0, 0, 0.25) !important;
-    background-color: rgba(0, 0, 0, 0.25) !important;
-    backdrop-filter: blur(20px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-    color: hsl(0, 0%, 98%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
-  }
+  @media (hover: hover) {
+    .apple-theme-toggle:hover {
+      transform: translateY(-0.5px);
+      box-shadow: var(--glass-elevated-shadow-hover);
+    }
 
-  .apple-theme-toggle:hover {
-    transform: translateY(-0.5px);
-    background: rgba(255, 255, 255, 0.15) !important;
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-    box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.12),
-      0 2px 6px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  }
-
-  .dark .apple-theme-toggle:hover {
-    background: rgba(0, 0, 0, 0.35) !important;
-    background-color: rgba(0, 0, 0, 0.35) !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
-    box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.5),
-      0 2px 6px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    .dark .apple-theme-toggle:hover {
+      background: rgba(0, 0, 0, 0.35) !important;
+      background-color: rgba(0, 0, 0, 0.35) !important;
+    }
   }
 
   .apple-theme-toggle:active {
-    transform: translateY(0);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transform: translateY(0) scale(0.98);
+    box-shadow: var(--glass-pressed-shadow);
   }
 
-  .dark .apple-theme-toggle:active {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  }
-
-  .apple-theme-toggle svg {
+  .apple-theme-toggle svg,
+  .nav-action-icon {
+    width: var(--nav-icon-size) !important;
+    height: var(--nav-icon-size) !important;
     color: currentColor;
-    transition: color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    flex-shrink: 0;
   }
 
   /* ============================================
      CONTACT ICON 3D
      ============================================ */
   .contact-icon-3d {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 2px solid rgba(0, 0, 0, 0.1);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 2px solid var(--glass-border);
     position: relative;
     overflow: hidden;
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.1),
-      0 1px 4px rgba(0, 0, 0, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.7);
-    transition: all 0.3s ease;
+    box-shadow: var(--glass-card-shadow);
+    transition:
+      transform 0.3s ease,
+      background-color 0.3s ease,
+      border-color 0.3s ease;
     transform-style: preserve-3d;
     perspective: 1000px;
   }
 
-  .dark .contact-icon-3d {
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.3),
-      0 1px 4px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  }
-
   .contact-icon-3d:hover {
     transform: translateY(-5px) rotateX(15deg) rotateY(15deg);
-    background: rgba(0, 0, 0, 0.2);
-    border-color: rgba(0, 0, 0, 0.2);
-    box-shadow:
-      0 20px 40px rgba(0, 0, 0, 0.12),
-      0 10px 20px rgba(0, 0, 0, 0.06);
-  }
-
-  .dark .contact-icon-3d:hover {
-    box-shadow:
-      0 20px 40px rgba(0, 0, 0, 0.4),
-      0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--glass-lift-shadow);
   }
 
   /* ============================================
@@ -865,8 +1166,7 @@
     box-shadow: var(--btn-shadow);
     transition:
       transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     min-width: 2.75rem;
     min-height: 2.75rem;
     display: flex;
@@ -902,12 +1202,6 @@
     transform-origin: right center;
   }
 
-  .dark .social-icon-adaptive {
-    background: var(--btn-bg);
-    border: 1px solid var(--btn-border);
-    box-shadow: var(--btn-shadow);
-  }
-
   .social-icon-adaptive:hover {
     transform: translateY(-1px);
     border-color: rgba(0, 0, 0, 0.18);
@@ -934,15 +1228,7 @@
 
   .social-icon-adaptive:focus-visible {
     outline: none;
-    box-shadow:
-      0 0 0 3px rgba(0, 0, 0, 0.1),
-      0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .dark .social-icon-adaptive:focus-visible {
-    box-shadow:
-      0 0 0 3px rgba(255, 255, 255, 0.15),
-      0 4px 12px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--glass-focus-ring);
   }
 
   .social-icon-color {
@@ -982,7 +1268,6 @@
     z-index: 1;
     transition:
       transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: var(--btn-bg) !important;
     border: 1px solid var(--btn-border) !important;
@@ -1022,14 +1307,6 @@
     transform-origin: right center;
   }
 
-  .dark .contact-button,
-  .dark .resume-button {
-    background: var(--btn-bg) !important;
-    border: 1px solid var(--btn-border) !important;
-    color: var(--btn-text) !important;
-    box-shadow: var(--btn-shadow);
-  }
-
   .dark .contact-button::before,
   .dark .resume-button::before {
     background: rgba(255, 255, 255, 0.08);
@@ -1061,31 +1338,35 @@
     box-shadow: var(--btn-active-shadow);
   }
 
+  /* Modal submit — match hero Contact Me / navbar Newsletter */
+  .contact-button.modal-form-submit,
+  .apple-newsletter-button.modal-form-submit {
+    width: 100% !important;
+    flex: none !important;
+    height: clamp(3rem, 8vw, 3.25rem) !important;
+    border-radius: 9999px;
+    font-size: clamp(0.875rem, 1.2vw + 0.25rem, 0.9375rem);
+    padding-left: clamp(1.25rem, 4vw, 2rem);
+    padding-right: clamp(1.25rem, 4vw, 2rem);
+  }
+
   /* ============================================
      MODAL GLASSOMORPHISM
      ============================================ */
-  .modal-glass {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      0 2px 8px rgba(0, 0, 0, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+  .modal-panel {
+    box-shadow: var(--modal-panel-shadow);
   }
 
-  .dark .modal-glass {
-    background: rgba(0, 0, 0, 0.3);
+  .modal-glass {
+    background: var(--glass-bg);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-elevated-shadow);
     font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
   }
 
   .modal-content-glass {
@@ -1232,12 +1513,66 @@
     align-items: center;
     justify-content: center;
     padding-top: calc(clamp(3rem, 6vh, 4rem) + clamp(0.75rem, 1.5vh, 1.25rem) + clamp(0.5rem, 1vh, 0.75rem));
-    padding-left: clamp(0.5rem, 2vw, 2rem);
-    padding-right: clamp(0.5rem, 2vw, 2rem);
-    padding-bottom: clamp(0.5rem, 2vh, 1rem);
+    padding-left: clamp(1rem, 4vw, 2.5rem);
+    padding-right: clamp(1rem, 4vw, 2.5rem);
+    padding-bottom: clamp(0.75rem, 2vh, 1.5rem);
     min-height: calc(100dvh - clamp(3rem, 6vh, 4rem) - clamp(0.75rem, 1.5vh, 1.25rem) - clamp(0.5rem, 1vh, 0.75rem));
     width: 100%;
-    overflow: hidden;
+    overflow-x: visible;
+    overflow-y: auto;
+  }
+
+  /* Phones & tablets: never clip icon shadows on the sides */
+  @media (max-width: 1024px) {
+    :root {
+      --social-shadow-inset: clamp(0.5rem, 2.5vw, 0.875rem);
+      /* Matches fixed navbar footprint — only tweak --hero-below-nav-gap for spacing */
+      --nav-clearance-top: clamp(0.75rem, 1.5vh, 1.25rem);
+      --nav-bar-height: clamp(3rem, 6vh, 4rem);
+      --nav-clearance-bottom: clamp(0.5rem, 1vh, 0.75rem);
+      --hero-below-nav-gap: clamp(0.125rem, 0.35vh, 0.375rem);
+    }
+
+    .content-section,
+    .content-section .content-width-limit,
+    .content-section .max-container,
+    .mobile-layout,
+    .mobile-layout .mobile-text-column,
+    .mobile-layout .social-icons-mobile {
+      overflow-x: visible !important;
+    }
+
+    .content-section {
+      overflow-y: auto !important;
+      scroll-padding-inline: var(--social-shadow-inset);
+      justify-content: flex-start !important;
+      align-items: center !important;
+      padding-top: calc(
+        var(--nav-clearance-top) +
+        var(--nav-bar-height) +
+        var(--nav-clearance-bottom) +
+        var(--hero-below-nav-gap)
+      ) !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .content-section {
+      padding-left: clamp(0.5rem, 2vw, 2rem);
+      padding-right: clamp(0.5rem, 2vw, 2rem);
+      padding-bottom: clamp(0.5rem, 2vh, 1rem);
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+  }
+
+  /* Tall 1024px-wide tablets (iPad Pro) — allow scroll; do not clip shadows */
+  @media (min-width: 1024px) and (max-width: 1024px) and (min-height: 681px) {
+    .content-section {
+      overflow-x: visible !important;
+      overflow-y: auto !important;
+      padding-bottom: clamp(1.25rem, 4vh, 2.5rem) !important;
+    }
   }
 
   /* Landscape mobile: allow scroll & compact spacing
@@ -1323,6 +1658,287 @@
     }
     .responsive-role {
       justify-content: center;
+    }
+  }
+
+  /*
+   * Tablet philosophy (431–1024px width):
+   * iPad Mini 768×1024 · iPad Air 820×1180 · iPad Pro 1024×1366 · Surface Pro 7 912×1368
+   * Scales with vmin/vh so ratios stay consistent across devices.
+   */
+  @media (min-width: 431px) and (max-width: 1024px) {
+    :root {
+      --tablet-inline: clamp(2rem, 5vw, 3.5rem);
+      --tablet-content-measure: min(100%, 34rem);
+      --tablet-block-gap: clamp(0.75rem, calc(1.25vh + 0.45vw), 1.125rem);
+    }
+
+    .navbar-glass {
+      width: calc(100% - 2 * var(--tablet-inline)) !important;
+      max-width: 56rem;
+    }
+
+    .content-section {
+      min-height: 100dvh;
+      padding-left: var(--tablet-inline) !important;
+      padding-right: var(--tablet-inline) !important;
+      padding-bottom: clamp(2rem, 5vh, 3rem) !important;
+      scroll-padding-bottom: 1rem;
+      box-sizing: border-box;
+    }
+
+    .mobile-layout {
+      max-width: var(--tablet-content-measure) !important;
+      width: 100%;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      gap: var(--tablet-block-gap) !important;
+      margin-inline: auto;
+      overflow-x: visible;
+      overflow-y: visible;
+      box-sizing: border-box;
+    }
+
+    .mobile-layout .mobile-text-column {
+      overflow: visible;
+      padding-bottom: 0.25rem;
+    }
+
+    .mobile-layout .avatar-container {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .mobile-layout .avatar-responsive {
+      width: clamp(14rem, 32vmin, 18.5rem);
+      height: clamp(14rem, 32vmin, 18.5rem);
+    }
+
+    .mobile-layout .mobile-text-column {
+      padding-inline: 0 !important;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .mobile-layout .mobile-text-column.home-section-spacing > * + * {
+      margin-top: var(--tablet-block-gap) !important;
+    }
+
+    .mobile-layout .mobile-text-column .home-section-spacing > * + * {
+      margin-top: clamp(0.5rem, 1vh, 0.875rem) !important;
+    }
+
+    .mobile-layout .tablet-content-block {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0;
+      box-sizing: border-box;
+      padding-inline: 0;
+    }
+
+    .mobile-layout .responsive-bio {
+      margin-inline: 0;
+    }
+
+    .mobile-layout p.max-w-lg {
+      max-width: 100% !important;
+      margin-inline: 0 !important;
+    }
+
+    .mobile-layout [aria-label="Contact and resume actions"].tablet-content-block {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: var(--tablet-block-gap);
+    }
+
+    .mobile-layout [aria-label="Contact and resume actions"] .contact-button,
+    .mobile-layout [aria-label="Contact and resume actions"] .resume-button {
+      flex: 1 1 0;
+      width: auto;
+      min-width: 0;
+      max-width: none;
+    }
+
+    .mobile-layout .social-icons-mobile.tablet-content-block {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: clamp(0.5rem, 1vw, 0.75rem) !important;
+      overflow: visible !important;
+      padding-top: 0.125rem;
+      padding-bottom: clamp(0.625rem, 1.5vh, 1rem);
+      padding-inline: var(--social-shadow-inset) !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box;
+    }
+
+    .mobile-layout .social-icons-mobile > a {
+      padding: 0.375rem !important;
+      margin: 0;
+      flex: 0 1 auto;
+    }
+
+    .mobile-layout .social-icons-mobile .social-icon-adaptive {
+      min-width: 2.75rem;
+      min-height: 2.75rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      padding: 0.375rem !important;
+      flex: 0 1 auto;
+      box-sizing: border-box;
+    }
+
+    .mobile-layout .social-icons-mobile .social-icon-color {
+      width: 1.375rem;
+      height: 1.375rem;
+    }
+  }
+
+  /*
+   * Compact phone layout (DevTools mobile presets, portrait widths 360–430px):
+   * iPhone SE · iPhone XR · iPhone 12 Pro · iPhone 14 Pro Max · Pixel 7 ·
+   * Galaxy S8+ · Galaxy S20 Ultra · Galaxy A51/71
+   * Tablets (768px+) and Nest Hub are excluded.
+   */
+  @media (max-width: 430px) {
+    :root {
+      --compact-inline: 1rem;
+      /* Scales with screen ratio — taller/wider phones get slightly more air */
+      --compact-block-gap: clamp(0.4375rem, calc(1.2vh + 0.35vw), 0.875rem);
+    }
+
+    .navbar-glass {
+      width: calc(100% - 2 * var(--compact-inline)) !important;
+      max-width: none;
+    }
+
+    .content-section {
+      min-height: 100dvh;
+      padding-bottom: clamp(1.75rem, 6vh, 3rem) !important;
+      scroll-padding-bottom: 1rem;
+      padding-left: var(--compact-inline) !important;
+      padding-right: var(--compact-inline) !important;
+      box-sizing: border-box;
+    }
+
+    .mobile-layout {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      gap: var(--compact-block-gap) !important;
+      overflow-x: visible;
+      overflow-y: visible;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .mobile-layout .home-section-spacing > * + * {
+      margin-top: var(--compact-block-gap) !important;
+    }
+
+    .mobile-layout .avatar-container {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .mobile-layout .avatar-responsive {
+      width: clamp(11.75rem, 46vw, 16.5rem);
+      height: clamp(11.75rem, 46vw, 16.5rem);
+    }
+
+    .mobile-layout .mobile-text-column {
+      padding-inline: 0 !important;
+      max-width: 100%;
+      overflow: visible;
+      padding-bottom: 0.25rem;
+    }
+
+    .mobile-layout .bio-full-width {
+      padding-inline: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+
+    .mobile-layout .responsive-bio {
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 0;
+      margin-right: 0;
+      max-width: 100%;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .mobile-layout p.max-w-lg {
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .mobile-layout [aria-label="Contact and resume actions"] {
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      max-width: 100% !important;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .mobile-layout [aria-label="Contact and resume actions"] .contact-button,
+    .mobile-layout [aria-label="Contact and resume actions"] .resume-button {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      flex: none;
+      box-sizing: border-box;
+    }
+
+    /* Full width row with inset so circle shadows are not clipped at edges */
+    .mobile-layout .social-icons-mobile {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding-inline: var(--social-shadow-inset) !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      overflow: visible !important;
+      padding-top: 0.125rem;
+      padding-bottom: clamp(0.5rem, 1.25vh, 0.875rem);
+      box-sizing: border-box;
+    }
+
+    .mobile-layout .social-icons-mobile.bio-full-width {
+      padding-inline: var(--social-shadow-inset) !important;
+    }
+
+    .mobile-layout .social-icons-mobile > a {
+      padding: 0.3125rem !important;
+      margin: 0;
+      flex: 0 0 auto;
+    }
+
+    .mobile-layout .social-icons-mobile .social-icon-adaptive {
+      min-width: 2.375rem;
+      min-height: 2.375rem;
+      width: 2.375rem;
+      height: 2.375rem;
+      padding: 0.3125rem !important;
+      flex: 0 0 auto;
+      box-sizing: border-box;
+    }
+
+    .mobile-layout .social-icons-mobile .social-icon-color {
+      width: 1.1875rem;
+      height: 1.1875rem;
     }
   }
 }

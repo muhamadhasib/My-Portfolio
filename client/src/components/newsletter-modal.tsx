@@ -123,7 +123,7 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
             >
               {/* Apple-Style Modal Card with Website Gradient Background */}
               <div
-                className="relative border border-border rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden"
+                className="modal-panel relative border border-border rounded-[2rem] overflow-hidden"
                 style={{
                   background: `
                     radial-gradient(circle at 20% 50%, hsla(270, 85%, 60%, 0.15) 0%, transparent 50%),
@@ -173,11 +173,11 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
                     <Button
                       type="submit"
                       disabled={newsletterMutation.isPending}
-                      className="w-full h-[48px] md:h-[52px] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-[15px] transition-all duration-200 shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] active:scale-[0.98]"
+                      className="apple-newsletter-button modal-form-submit flex items-center justify-center font-medium"
                     >
                       {newsletterMutation.isPending ? (
                         <div className="flex items-center justify-center space-x-2.5">
-                          <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                          <div className="w-4 h-4 border-2 border-current/30 border-t-current rounded-full animate-spin" />
                           <span>Subscribing...</span>
                         </div>
                       ) : (

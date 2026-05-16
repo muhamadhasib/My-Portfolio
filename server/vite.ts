@@ -33,7 +33,7 @@ export async function setupVite(app: Express, server: Server) {
       ...viteLogger,
       error: (msg, options) => {
         viteLogger.error(msg, options);
-        process.exit(1);
+        // Keep dev server running; Vite can log non-fatal HTML/JSON transform warnings.
       },
     },
     server: serverOptions,

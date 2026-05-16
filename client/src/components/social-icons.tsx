@@ -51,7 +51,12 @@ export function SocialIcons({ className = "" }: SocialIconsProps) {
   };
 
   return (
-    <div className={`flex justify-between items-center w-full ${className} overflow-visible`}>
+    <motion.div
+      className={`flex justify-between items-center w-full overflow-visible ${className}`}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.45 }}
+    >
       {socialLinks.map(({ icon: Icon, href, label }, index) => (
         <motion.a
           key={label}
@@ -59,7 +64,7 @@ export function SocialIcons({ className = "" }: SocialIconsProps) {
           target={label === "Gmail" ? "_self" : "_blank"}
           rel={label === "Gmail" ? undefined : "noopener noreferrer"}
           onClick={() => handleSocialClick(label, href)}
-          className={`p-[clamp(0.75rem,1.5vw,1rem)] rounded-full group relative social-icon-adaptive will-change-transform`}
+          className="rounded-full group relative social-icon-adaptive will-change-transform focus-visible:outline-none"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 + index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
@@ -68,6 +73,6 @@ export function SocialIcons({ className = "" }: SocialIconsProps) {
           <span className="sr-only">{label}</span>
         </motion.a>
       ))}
-    </div>
+    </motion.div>
   );
 }

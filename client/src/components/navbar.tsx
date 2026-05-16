@@ -2,7 +2,23 @@ import { Moon, Sun, Mail } from "lucide-react";
 import { useTheme } from "./theme-provider";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+const THEME_ICON_MS = 0.12;
+
+function usePrefersHover() {
+  const [prefersHover, setPrefersHover] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover)");
+    const update = () => setPrefersHover(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  return prefersHover;
+}
 
 interface NavbarProps {
   onNewsletterClick: () => void;
@@ -10,8 +26,17 @@ interface NavbarProps {
 
 export function Navbar({ onNewsletterClick }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
+  const prefersHover = usePrefersHover();
   const [newsletterRotation, setNewsletterRotation] = useState(0);
   const [themeRotation, setThemeRotation] = useState(0);
+
+  const handleThemeIconEnter = useCallback(() => {
+    if (prefersHover) setThemeRotation(180);
+  }, [prefersHover]);
+
+  const handleThemeIconLeave = useCallback(() => {
+    if (prefersHover) setThemeRotation(-180);
+  }, [prefersHover]);
 
   return (
     <div className="navbar-section">
@@ -51,7 +76,7 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                   transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                   style={{ display: "inline-flex" }}
                 >
-                  <Mail className="w-[clamp(1rem,2vw,1.25rem)] h-[clamp(1rem,2vw,1.25rem)]" />
+                  <Mail className="nav-action-icon" />
                 </motion.div>
                 <span>Newsletter</span>
               </Button>
@@ -59,16 +84,17 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
 
             {/* Apple Design Language Theme Toggle */}
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={prefersHover ? { scale: 1.02 } : undefined}
+              whileTap={{ scale: 0.98 }}
             >
               <Button
                 onClick={toggleTheme}
-                onMouseEnter={() => setThemeRotation(180)}
-                onMouseLeave={() => setThemeRotation(-180)}
+                onMouseEnter={handleThemeIconEnter}
+                onMouseLeave={handleThemeIconLeave}
                 variant="ghost"
-                size="sm"
-                className="apple-theme-toggle relative rounded-full flex items-center justify-center overflow-hidden"
+                size="icon"
+                aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+                className="apple-theme-toggle theme-switch-skip relative flex items-center justify-center overflow-hidden"
               >
                 <motion.div
                   className="relative z-10 flex items-center justify-center"
@@ -78,8 +104,8 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                     scale: theme === "light" ? 1 : 0
                   }}
                   transition={{
-                    duration: 0.35,
-                    ease: [0.25, 0.1, 0.25, 1]
+                    duration: THEME_ICON_MS,
+                    ease: [0.4, 0, 0.2, 1]
                   }}
                 >
                   <motion.div
@@ -89,10 +115,10 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                         setThemeRotation(0);
                       }
                     }}
-                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                    transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                     style={{ display: "inline-flex" }}
                   >
-                    <Moon className="w-[clamp(1.25rem,2vw,1.5rem)] h-[clamp(1.25rem,2vw,1.5rem)]" />
+                    <Moon className="nav-action-icon" />
                   </motion.div>
                 </motion.div>
                 <motion.div
@@ -103,8 +129,8 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                     scale: theme === "light" ? 0 : 1
                   }}
                   transition={{
-                    duration: 0.35,
-                    ease: [0.25, 0.1, 0.25, 1]
+                    duration: THEME_ICON_MS,
+                    ease: [0.4, 0, 0.2, 1]
                   }}
                 >
                   <motion.div
@@ -114,10 +140,10 @@ export function Navbar({ onNewsletterClick }: NavbarProps) {
                         setThemeRotation(0);
                       }
                     }}
-                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                    transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                     style={{ display: "inline-flex" }}
                   >
-                    <Sun className="w-[clamp(1.25rem,2vw,1.5rem)] h-[clamp(1.25rem,2vw,1.5rem)]" />
+                    <Sun className="nav-action-icon" />
                   </motion.div>
                 </motion.div>
               </Button>

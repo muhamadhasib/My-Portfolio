@@ -43,6 +43,19 @@
     <!-- Additional Meta Tags -->
     <meta name="theme-color" content="#0f172a" />
     <meta name="color-scheme" content="dark light" />
+    <script>
+      (function () {
+        var stored = localStorage.getItem("theme");
+        var theme =
+          stored === "dark" || stored === "light"
+            ? stored
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        document.documentElement.classList.add(theme);
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
     <meta name="format-detection" content="telephone=no" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="application-name" content="Muhammad Hasib - AI Engineer" />

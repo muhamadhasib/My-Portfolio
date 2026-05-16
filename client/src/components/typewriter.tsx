@@ -7,6 +7,10 @@ interface TypewriterProps {
 }
 
 export function Typewriter({ texts, className = "" }: TypewriterProps) {
+  const longestText = texts.reduce(
+    (longest, text) => (text.length > longest.length ? text : longest),
+    texts[0] ?? ""
+  );
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -38,19 +42,19 @@ export function Typewriter({ texts, className = "" }: TypewriterProps) {
 
   return (
     <motion.div
-      className={`${className} flex items-center justify-center lg:justify-start min-h-[3rem] typing-animation-container`}
+      className={`${className} inline-grid justify-items-center lg:justify-items-start typing-animation-container`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.5 }}
-      style={{ 
-        isolation: 'isolate', 
-        transform: 'translateZ(0)',
-        contain: 'layout style paint',
-        willChange: 'transform'
-      }}
+      aria-live="polite"
     >
-      <span className="whitespace-nowrap inline-block min-w-0 text-ellipsis text-center lg:text-left typing-text-isolated">
+      {/* Reserve width/height for the longest role so text never clips */}
+      <span className="invisible col-start-1 row-start-1 whitespace-nowrap pointer-events-none select-none" aria-hidden="true">
+        {longestText}
+      </span>
+      <span className="col-start-1 row-start-1 whitespace-nowrap text-center lg:text-left typing-text-isolated">
         {displayText}
+        <span className="inline-block w-[2px] h-[0.9em] ml-0.5 bg-foreground/60 align-middle animate-pulse" aria-hidden="true" />
       </span>
     </motion.div>
   );

@@ -1,10 +1,19 @@
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export function Avatar3D() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isCompactPhone, setIsCompactPhone] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 430px)");
+    const onChange = () => setIsCompactPhone(mql.matches);
+    onChange();
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (containerRef.current) {
@@ -27,22 +36,24 @@ export function Avatar3D() {
   return (
     <motion.div
       ref={containerRef}
-      className="relative avatar-mobile-size fold:avatar-desktop-size lg:avatar-desktop-size flex items-center justify-center overflow-visible"
+      className="relative avatar-responsive flex items-center justify-center overflow-visible"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onHoverStart={() => setIsHovered(true)}
       animate={{
-        y: [0, -10, 0],
+        y: isCompactPhone ? 0 : [0, -10, 0],
         rotateY: mousePosition.x,
         rotateX: -mousePosition.y,
         scale: isHovered ? 1.05 : 1,
       }}
       transition={{
-        y: {
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
+        y: isCompactPhone
+          ? { duration: 0 }
+          : {
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
         rotateY: {
           type: "spring",
           stiffness: 80,
